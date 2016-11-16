@@ -17,6 +17,7 @@ namespace SnakeMess
 {
 	class Point
 	{
+		//Small change to test git
 		public const string Ok = "Ok";
 
 		public int X; public int Y;
