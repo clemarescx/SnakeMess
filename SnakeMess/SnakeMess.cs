@@ -17,90 +17,107 @@ namespace SnakeMess
 {
 	class SnakeMess
 	{
+		private static readonly List<Point> _snake = new List<Point>();
+
+		enum Direction
+		{
+			Up, Right, Down, Left
+		}
+
 		public static void Main(string[] arguments)
 		{
 			/**
 			 * INITIALISE GAME ELEMENTS
 			 */
-			bool gg = false, pause = false, inUse = false;
-			short newDir = 2; // 0 = up, 1 = right, 2 = down, 3 = left
-			short last = newDir;
+			//bool gg = false;
+			bool running = true;
+			bool pause = false;
+			bool inUse = false;
 
+			// short newDir = 2;
+			// short last = newDir;
+			Direction newDirection = Direction.Down; // 0 = up, 1 = right, 2 = down, 3 = left
+			Direction lastDirection = newDirection;
 			
-			Random rng = new Random();
-			Point app = new Point();
+			//Random rng = new Random();
+			//Point app = new Point();
+			var rand = new Random();
+			var apple = new Point();
 
-			List<Point> snake = new List<Point>();
-			snake.Add(new Point(10, 10));
-			snake.Add(new Point(10, 10));
-			snake.Add(new Point(10, 10));
-			snake.Add(new Point(10, 10));
+			//var snake = new List<Point>();
+			_snake.Add(new Point(10, 10));
+			_snake.Add(new Point(10, 10));
+			_snake.Add(new Point(10, 10));
+			_snake.Add(new Point(10, 10));
 
 			int boardW = Console.WindowWidth, boardH = Console.WindowHeight;
 			Console.CursorVisible = false;
 			Console.Title = "Westerdals Oslo ACT - SNAKE";
-			
-			//apple's colour
-			Console.ForegroundColor = ConsoleColor.Green;
 			Console.SetCursorPosition(10, 10);
 			Console.Write("@");
 
 			while (true) {
-				app.X = rng.Next(0, boardW);
-				app.Y = rng.Next(0, boardH);
-				bool spot = true;
-				foreach (Point i in snake)
-					if (i.X == app.X && i.Y == app.Y) {
+				apple.X = rand.Next(0, boardW);
+				apple.Y = rand.Next(0, boardH);
+				bool spot = !headHits(apple);
+				/*
+				  bool spot = true;
+				  foreach (var bodyPart in _snake){
+					if (bodyPart == apple) {
 						spot = false;
 						break;
 					}
+				}
+				*/
 				if (spot) {
 					Console.ForegroundColor = ConsoleColor.Green;
-					Console.SetCursorPosition(app.X, app.Y);
+					Console.SetCursorPosition(apple.X, apple.Y);
 					Console.Write("$");
 					break;
 				}
 			}
 
-			Stopwatch t = new Stopwatch();
-			t.Start();
+			var time = new Stopwatch();
+			time.Start();
 
 			/**
 			 * GAME LOOP START
 			 */
 
-			while (!gg) {
+			while (running) {
 				if (Console.KeyAvailable) {
-					ConsoleKeyInfo cki = Console.ReadKey(true);
-					if (cki.Key == ConsoleKey.Escape)
-						gg = true;
-					else if (cki.Key == ConsoleKey.Spacebar)
+					var inputKey = Console.ReadKey(true);
+					if (inputKey.Key == ConsoleKey.Escape)
+						running = false;
+					else if (inputKey.Key == ConsoleKey.Spacebar)
 						pause = !pause;
-					else if (cki.Key == ConsoleKey.UpArrow && last != 2)
-						newDir = 0;
-					else if (cki.Key == ConsoleKey.RightArrow && last != 3)
-						newDir = 1;
-					else if (cki.Key == ConsoleKey.DownArrow && last != 0)
-						newDir = 2;
-					else if (cki.Key == ConsoleKey.LeftArrow && last != 1)
-						newDir = 3;
+					else if (inputKey.Key == ConsoleKey.UpArrow && lastDirection != Direction.Down)
+						newDirection = Direction.Up;
+					else if (inputKey.Key == ConsoleKey.RightArrow && lastDirection != Direction.Left)
+						newDirection = Direction.Right;
+					else if (inputKey.Key == ConsoleKey.DownArrow && lastDirection != Direction.Up)
+						newDirection = Direction.Down;
+					else if (inputKey.Key == ConsoleKey.LeftArrow && lastDirection != Direction.Right)
+						newDirection = Direction.Left;
 				}
 
 				if (!pause) {
-					if (t.ElapsedMilliseconds < 100)
+					if (time.ElapsedMilliseconds < 100)
+					{
 						continue;
-					t.Restart();
-					Point tail = new Point(snake.First());
-					Point head = new Point(snake.Last());
-					Point newH = new Point(head);
-					switch (newDir) {
-						case 0:
+					}
+					time.Restart();
+					var tail = new Point(_snake.First());
+					var head = new Point(_snake.Last());
+					var newH = new Point(head);
+					switch (newDirection) {
+						case Direction.Up:
 							newH.Y -= 1;
 							break;
-						case 1:
+						case Direction.Right:
 							newH.X += 1;
 							break;
-						case 2:
+						case Direction.Down:
 							newH.Y += 1;
 							break;
 						default:
@@ -109,24 +126,21 @@ namespace SnakeMess
 					}
 
 					if (newH.X < 0 || newH.X >= boardW)
-						gg = true;
+						running = false;
 					else if (newH.Y < 0 || newH.Y >= boardH)
-						gg = true;
+						running = false;
 
-					if (newH.X == app.X && newH.Y == app.Y) {
-						if (snake.Count + 1 >= boardW * boardH)
+					if (newH == apple) {
+						if (_snake.Count + 1 >= boardW * boardH)
 							// No more room to place apples - game over.
-							gg = true;
+							running = false;
 						else {
 							while (true) {
-								app.X = rng.Next(0, boardW);
-								app.Y = rng.Next(0, boardH);
-								bool found = true;
-								foreach (Point i in snake)
-									if (i.X == app.X && i.Y == app.Y) {
-										found = false;
-										break;
-									}
+								apple.X = rand.Next(0, boardW);
+								apple.Y = rand.Next(0, boardH);
+
+								bool found = headHits(apple);
+								
 								if (found) {
 									inUse = true;
 									break;
@@ -136,16 +150,19 @@ namespace SnakeMess
 					}
 
 					if (!inUse) {
-						snake.RemoveAt(0);
-						foreach (Point x in snake)
-							if (x.X == newH.X && x.Y == newH.Y) {
+						_snake.RemoveAt(0);
+
+						//running = !headHits(newH);
+						
+						foreach (var bodyPart in _snake)
+							if (bodyPart == newH) {
 								// Death by accidental self-cannibalism.
-								gg = true;
+								running = false;
 								break;
 							}
 					}
 
-					if (!gg) {
+					if (running) {
 						Console.ForegroundColor = ConsoleColor.Yellow;
 						Console.SetCursorPosition(head.X, head.Y);
 						Console.Write("0");
@@ -155,18 +172,35 @@ namespace SnakeMess
 							Console.Write(" ");
 						} else {
 							Console.ForegroundColor = ConsoleColor.Green;
-							Console.SetCursorPosition(app.X, app.Y);
+							Console.SetCursorPosition(apple.X, apple.Y);
 							Console.Write("$");
 							inUse = false;
 						}
-						snake.Add(newH);
+						_snake.Add(newH);
 						Console.ForegroundColor = ConsoleColor.Yellow;
 						Console.SetCursorPosition(newH.X, newH.Y);
 						Console.Write("@");
-						last = newDir;
+						lastDirection = newDirection;
 					}
 				}
 			}
+		}
+
+		private static bool headHits(Point point)
+		{
+			bool collidesWithSnake = false;
+
+			foreach (var bodyPart in _snake)
+			{
+				if (bodyPart == point) {
+					// Death by accidental self-cannibalism.
+					collidesWithSnake = true;
+					break;
+				}
+			}
+				
+
+			return collidesWithSnake;
 		}
 	}
 }
