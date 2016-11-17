@@ -19,77 +19,66 @@ namespace SnakeMess {
 		private static List<Point> _snake;
 		private static Point _screenBoundaryPoint;
 
-		enum Direction {
+		private enum Direction {
 			Up, Right, Down, Left
 		}
 
 		public static void Main(string[] arguments) {
+
+
+			#region Game Variables initialisation
 			/**
 			 * INITIALISE GAME ELEMENTS
 			 */
-			//bool gg = false;
+
 			bool running = true;
 			bool pause = false;
 			bool addOneMoreBodyPart = false;
 
-			// short newDir = 2;
-			// short last = newDir;
 			Direction newDirection = Direction.Down; // 0 = up, 1 = right, 2 = down, 3 = left
 			Direction lastDirection = newDirection;
 
-			//Random rng = new Random();
-			//Point app = new Point();
 			_screenBoundaryPoint = new Point(Console.WindowWidth, Console.WindowHeight);
 			_snake = new List<Point>();
 			var rand = new Random();
 			var apple = new Point();
 
-			//var snake = new List<Point>();
 			_snake.Add(new Point(10, 10));
 			_snake.Add(new Point(10, 10));
 			_snake.Add(new Point(10, 10));
 			_snake.Add(new Point(10, 10));
-
-			//int boardW = Console.WindowWidth, boardH = Console.WindowHeight;
 
 			Console.CursorVisible = false;
 			Console.Title = "Westerdals Oslo ACT - SNAKE";
 			Console.SetCursorPosition(10, 10);
 			Console.Write("@");
 
-			while (true) {
-				//apple.X = rand.Next(0, boardW);
-				//apple.Y = rand.Next(0, boardH);
+			do {
 				apple.X = rand.Next(0, _screenBoundaryPoint.X);
 				apple.Y = rand.Next(0, _screenBoundaryPoint.Y);
-				bool spot = !HeadHits(apple);
-				/*
-				  bool spot = true;
-				  foreach (var bodyPart in _snake){
-					if (bodyPart == apple) {
-						spot = false;
-						break;
-					}
-				}
-				*/
-				if (spot) {
-					Console.ForegroundColor = ConsoleColor.Green;
-					Console.SetCursorPosition(apple.X, apple.Y);
-					Console.Write("$");
-					break;
-				}
 			}
+			while (CannotPlace(apple));
+
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.SetCursorPosition(apple.X, apple.Y);
+			Console.Write("$");
+			
 
 			var time = new Stopwatch();
 			time.Start();
+			#endregion
 
+
+			#region Game Loop Starts
 			/**
 			 * GAME LOOP START
 			 */
-
 			while (running) {
-				if (Console.KeyAvailable) {
+				// check for user input
+			if (Console.KeyAvailable) { // <-- this listens to input
+
 					var inputKey = Console.ReadKey(true);
+
 					if (inputKey.Key == ConsoleKey.Escape)
 						running = false;
 					else if (inputKey.Key == ConsoleKey.Spacebar)
@@ -103,7 +92,7 @@ namespace SnakeMess {
 					else if (inputKey.Key == ConsoleKey.LeftArrow && lastDirection != Direction.Right)
 						newDirection = Direction.Left;
 				}
-
+		
 				if (!pause) {
 					if (time.ElapsedMilliseconds < 100) {
 						continue;
@@ -127,25 +116,24 @@ namespace SnakeMess {
 							break;
 					}
 
-					//if (newH.X < 0 || newH.X >= boardW || newH.Y < 0 || newH.Y >= boardH)
-					//if (newH.X < 0 || newH.X >= _screenBoundaryPoint.X || newH.Y < 0 || newH.Y >= _screenBoundaryPoint.Y)
-					if (OutOfBoard(newH))
-					{
+					// The snake hits a wall
+					if (OutOfWindow(newH)){
 						running = false;
 					}
 
-
+					// The snake eats the apple
 					if (newH == apple) {
-//						if (Snake.Count + 1 >= boardW * boardH)
+
 						if (_snake.Count + 1 >= _screenBoundaryPoint.X * _screenBoundaryPoint.Y)
 							// No more room to place apples - game over.
 							running = false;
 						else {
+							
 							while (true) {
 								apple.X = rand.Next(0, _screenBoundaryPoint.X);
 								apple.Y = rand.Next(0, _screenBoundaryPoint.Y);
 
-								bool found = !HeadHits(apple);
+								bool found = !CannotPlace(apple);
 
 								if (found) {
 									addOneMoreBodyPart = true;
@@ -190,9 +178,10 @@ namespace SnakeMess {
 					}
 				}
 			}
+			#endregion
 		}
 
-		private static bool HeadHits(Point point) {
+		private static bool CannotPlace(Point point) {
 			bool collidesWithSnake = false;
 
 			foreach (var bodyPart in _snake) {
@@ -204,7 +193,7 @@ namespace SnakeMess {
 			return collidesWithSnake;
 		}
 
-		private static bool OutOfBoard(Point point)
+		private static bool OutOfWindow(Point point)
 		{
 			return point.X < 0 || point.X >= _screenBoundaryPoint.X || point.Y < 0 || point.Y >= _screenBoundaryPoint.Y;
 		}
