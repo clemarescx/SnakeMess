@@ -13,34 +13,34 @@ using System.Diagnostics;
 //
 //          -Tomas
 //
-namespace SnakeMess
-{
-	class SnakeMess
-	{
-		private static readonly List<Point> _snake = new List<Point>();
+namespace SnakeMess {
+	class SnakeMess {
 
-		enum Direction
-		{
+		private static List<Point> _snake;
+		private static Point _screenBoundaryPoint;
+
+		enum Direction {
 			Up, Right, Down, Left
 		}
 
-		public static void Main(string[] arguments)
-		{
+		public static void Main(string[] arguments) {
 			/**
 			 * INITIALISE GAME ELEMENTS
 			 */
 			//bool gg = false;
 			bool running = true;
 			bool pause = false;
-			bool inUse = false;
+			bool addOneMoreBodyPart = false;
 
 			// short newDir = 2;
 			// short last = newDir;
 			Direction newDirection = Direction.Down; // 0 = up, 1 = right, 2 = down, 3 = left
 			Direction lastDirection = newDirection;
-			
+
 			//Random rng = new Random();
 			//Point app = new Point();
+			_screenBoundaryPoint = new Point(Console.WindowWidth, Console.WindowHeight);
+			_snake = new List<Point>();
 			var rand = new Random();
 			var apple = new Point();
 
@@ -50,16 +50,19 @@ namespace SnakeMess
 			_snake.Add(new Point(10, 10));
 			_snake.Add(new Point(10, 10));
 
-			int boardW = Console.WindowWidth, boardH = Console.WindowHeight;
+			//int boardW = Console.WindowWidth, boardH = Console.WindowHeight;
+
 			Console.CursorVisible = false;
 			Console.Title = "Westerdals Oslo ACT - SNAKE";
 			Console.SetCursorPosition(10, 10);
 			Console.Write("@");
 
 			while (true) {
-				apple.X = rand.Next(0, boardW);
-				apple.Y = rand.Next(0, boardH);
-				bool spot = !headHits(apple);
+				//apple.X = rand.Next(0, boardW);
+				//apple.Y = rand.Next(0, boardH);
+				apple.X = rand.Next(0, _screenBoundaryPoint.X);
+				apple.Y = rand.Next(0, _screenBoundaryPoint.Y);
+				bool spot = !HeadHits(apple);
 				/*
 				  bool spot = true;
 				  foreach (var bodyPart in _snake){
@@ -102,8 +105,7 @@ namespace SnakeMess
 				}
 
 				if (!pause) {
-					if (time.ElapsedMilliseconds < 100)
-					{
+					if (time.ElapsedMilliseconds < 100) {
 						continue;
 					}
 					time.Restart();
@@ -125,34 +127,36 @@ namespace SnakeMess
 							break;
 					}
 
-					if (newH.X < 0 || newH.X >= boardW)
+					//if (newH.X < 0 || newH.X >= boardW || newH.Y < 0 || newH.Y >= boardH)
+					//if (newH.X < 0 || newH.X >= _screenBoundaryPoint.X || newH.Y < 0 || newH.Y >= _screenBoundaryPoint.Y)
+					if (OutOfBoard(newH))
+					{
 						running = false;
-					else if (newH.Y < 0 || newH.Y >= boardH)
-						running = false;
+					}
+
 
 					if (newH == apple) {
-						if (_snake.Count + 1 >= boardW * boardH)
+//						if (Snake.Count + 1 >= boardW * boardH)
+						if (_snake.Count + 1 >= _screenBoundaryPoint.X * _screenBoundaryPoint.Y)
 							// No more room to place apples - game over.
 							running = false;
 						else {
 							while (true) {
-								apple.X = rand.Next(0, boardW);
-								apple.Y = rand.Next(0, boardH);
+								apple.X = rand.Next(0, _screenBoundaryPoint.X);
+								apple.Y = rand.Next(0, _screenBoundaryPoint.Y);
 
-								bool found = headHits(apple);
-								
+								bool found = !HeadHits(apple);
+
 								if (found) {
-									inUse = true;
+									addOneMoreBodyPart = true;
 									break;
 								}
 							}
 						}
 					}
 
-					if (!inUse) {
+					if (!addOneMoreBodyPart) {
 						_snake.RemoveAt(0);
-
-						//running = !headHits(newH);
 						
 						foreach (var bodyPart in _snake)
 							if (bodyPart == newH) {
@@ -160,6 +164,7 @@ namespace SnakeMess
 								running = false;
 								break;
 							}
+
 					}
 
 					if (running) {
@@ -167,14 +172,15 @@ namespace SnakeMess
 						Console.SetCursorPosition(head.X, head.Y);
 						Console.Write("0");
 
-						if (!inUse) {
+						if (!addOneMoreBodyPart) {
 							Console.SetCursorPosition(tail.X, tail.Y);
 							Console.Write(" ");
-						} else {
+						}
+						else {
 							Console.ForegroundColor = ConsoleColor.Green;
 							Console.SetCursorPosition(apple.X, apple.Y);
 							Console.Write("$");
-							inUse = false;
+							addOneMoreBodyPart = false;
 						}
 						_snake.Add(newH);
 						Console.ForegroundColor = ConsoleColor.Yellow;
@@ -186,21 +192,21 @@ namespace SnakeMess
 			}
 		}
 
-		private static bool headHits(Point point)
-		{
+		private static bool HeadHits(Point point) {
 			bool collidesWithSnake = false;
 
-			foreach (var bodyPart in _snake)
-			{
+			foreach (var bodyPart in _snake) {
 				if (bodyPart == point) {
-					// Death by accidental self-cannibalism.
 					collidesWithSnake = true;
 					break;
 				}
 			}
-				
-
 			return collidesWithSnake;
+		}
+
+		private static bool OutOfBoard(Point point)
+		{
+			return point.X < 0 || point.X >= _screenBoundaryPoint.X || point.Y < 0 || point.Y >= _screenBoundaryPoint.Y;
 		}
 	}
 }
