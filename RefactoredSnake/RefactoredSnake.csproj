@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityComposite.cs" />
     <Compile Include="View.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Model.cs" />
