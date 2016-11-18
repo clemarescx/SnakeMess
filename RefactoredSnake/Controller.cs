@@ -35,12 +35,24 @@ namespace RefactoredSnake
 
 		}
 
+
+		void run()
+		{
+			
+		}
+
+		void intiate()
+		{
+			
+		}
+
+
+
 		private void place(GameEntity entity)
 		{
 			Random r = new Random();
 			int x = r.Next(_board.X);
 			int y = r.Next(_board.Y);
-
 
 		}
 

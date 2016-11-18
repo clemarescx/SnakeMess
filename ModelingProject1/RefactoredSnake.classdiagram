@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="0005ebdf-4af5-4da3-bf00-71be08096efe" name="RefactoredSnake" linkedPackageId="51243d97-311a-4631-80dc-a4b004927cc2" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="00d9665f-0e41-4e50-ac93-d95e76df5483">
+      <profileInstance Id="b26b822e-7544-42e8-b755-75d88400bafa" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="b7c534a6-f590-48a9-874d-4d77945e03d7">
+      <profileInstance Id="b84d73cb-c706-40f4-97a9-34d12011685e" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="673abfcc-2c59-4141-8153-3994695456c2" name="View" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a5c403e0-b685-44b0-9057-86be90c3dac5" />
+        <targetEnds>
+          <association Id="70d8e2f6-4553-4f15-865b-aec3a5a297e4" isDerived="false" sourceEndRoleName="View" targetEndRoleName="Controller" isLeaf="false" isAbstract="false">
+            <classMoniker Id="2d9ce71a-c686-4015-866b-74dd3108958f" LastKnownName="Controller" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3106b65f-190b-4250-b3c1-0f6595b44374" name="View" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="afe7f92d-a701-4277-8337-e20fb4bec3d8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3b85d41f-ff68-40da-ac56-26b3d581deed" name="Controller" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="bed01eb3-0249-4fb2-ab3f-edbe55550b7a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2f15d591-97bc-4a9b-b161-3b7d055303f1" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c3416730-8a8c-445c-b726-d9439ea0a3ea" name="Model" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="018c9cc3-392c-4093-b357-7c3b535055c6" />
+        <ownedAttributesInternal>
+          <property Id="aee6434c-9b67-4204-b24f-87ae59f1d2b2" name="Snake" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="137be0b7-a725-4f51-942b-87e1bd44970e" />
+          </property>
+          <property Id="ec0c8006-70ba-4390-8fbc-fc8d4c89bace" name="Apple" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d309f1da-3750-449a-a3d1-c0fe95a61f85" />
+          </property>
+          <property Id="e5d3cc51-7c51-4477-8365-df641fa73c24" name="PrintBuffer" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="fc548642-41a4-491e-a1dd-9de2dcca5ccc" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2d9ce71a-c686-4015-866b-74dd3108958f" name="Controller" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="5c74912c-2a0a-4167-a5de-b55914dd4590" />
+        <targetEnds>
+          <association Id="185848d9-567c-48ae-a098-50ebec848b5c" isDerived="false" sourceEndRoleName="Controller" targetEndRoleName="Model" isLeaf="false" isAbstract="false">
+            <classMoniker Id="c3416730-8a8c-445c-b726-d9439ea0a3ea" LastKnownName="Model" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8a9616a3-fc35-43f3-ae2e-bfb711cbc021" name="Controller" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3bcac806-bfa2-4839-bfa9-bf8ff56d2b36" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c6587855-cf9b-45a2-a342-222f028c67c7" name="Model" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c9656379-89c7-41f3-9b73-cd1fde8a5d39" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="7b22458b-af17-4b8b-9fef-7046ad368f16" />
+          </association>
+          <association Id="a9513ead-e53e-48d4-84ac-49bce387ac81" isDerived="false" sourceEndRoleName="Controller" targetEndRoleName="View" isLeaf="false" isAbstract="false">
+            <classMoniker Id="673abfcc-2c59-4141-8153-3994695456c2" LastKnownName="View" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b97114e9-0882-47da-97c6-4c1c64f3ab34" name="Controller" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="e9878d4d-0fd5-4602-b2f0-5c30e6e5db12" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6992c3cb-60c1-438b-9c8e-e4271e7a94fd" name="View" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="58c233f1-4ab9-4acf-ae48-51347da17434" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="567f02e6-d2a5-47b4-9ac3-a4ddc6bb63dc" />
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="0b144a78-b8c3-47fe-a9d2-2034c417ed76" name="run" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="004631b6-57fc-4048-a433-d4f6c803a884" />
+          </operation>
+          <operation Id="36909fb5-c150-47fd-84c8-de8bd0a46451" name="initiate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9ffe3e69-9db6-4578-8139-f2f15b16e86a" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="51243d97-311a-4631-80dc-a4b004927cc2" name="ModelingProject1">
+    <elementDefinition Id="94536aad-eaf7-41b0-9a3b-6e08b7c9e052" />
+  </package>
+</logicalClassDesignerModel>

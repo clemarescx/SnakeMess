@@ -17,9 +17,15 @@ namespace RefactoredSnake {
 			Entities = new List<GameEntity>();
 		}
 
+		// View board = new View();
+		// _board.paintEntities(entities);
+
+
 		public void updateEntities()
 		{
-			
+			Entities.RemoveAll();
+			Entities.Add(Snake);
+			Entities.Add(Apple);
 		}
 
 		public bool contains(GameEntity entity)

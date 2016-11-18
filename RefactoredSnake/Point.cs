@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace SnakeMess {
-	class Point {
+namespace RefactoredSnake {
+	public class Point {
 		public int X;
 		public int Y;
 
@@ -16,17 +16,17 @@ namespace SnakeMess {
 			Y = input.Y;
 		}
 
-		public void moveTo(int newX, int newY)
-		{
+		public void moveTo(int newX, int newY) {
 			X = newX;
 			Y = newY;
 		}
 
-		public void moveTo(Point point) {
+		public void moveTo(Point point)
+		{
 			moveTo(point.X, point.Y);
 		}
 
-		public new bool Equals(Object obj) {
+		public new bool Equals(object obj) {
 			if (!(obj is Point))
 				return false;
 			Point point = (Point) obj;
