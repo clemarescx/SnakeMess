@@ -54,6 +54,8 @@ namespace SnakeMess {
 			Console.Write("@");
 
 			do {
+				Console.SetCursorPosition(0,0);
+				Console.WriteLine("Placing apple...");
 				apple.X = rand.Next(0, _screenBoundaryPoint.X);
 				apple.Y = rand.Next(0, _screenBoundaryPoint.Y);
 			}
@@ -62,7 +64,7 @@ namespace SnakeMess {
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.SetCursorPosition(apple.X, apple.Y);
 			Console.Write("$");
-			
+
 
 			var time = new Stopwatch();
 			time.Start();
@@ -75,7 +77,7 @@ namespace SnakeMess {
 			 */
 			while (running) {
 				// check for user input
-			if (Console.KeyAvailable) { // <-- this listens to input
+				if (Console.KeyAvailable) { // <-- this listens to input
 
 					var inputKey = Console.ReadKey(true);
 
@@ -92,7 +94,7 @@ namespace SnakeMess {
 					else if (inputKey.Key == ConsoleKey.LeftArrow && lastDirection != Direction.Right)
 						newDirection = Direction.Left;
 				}
-		
+
 				if (!pause) {
 					if (time.ElapsedMilliseconds < 100) {
 						continue;
@@ -117,7 +119,7 @@ namespace SnakeMess {
 					}
 
 					// The snake hits a wall
-					if (OutOfWindow(newH)){
+					if (OutOfWindow(newH)) {
 						running = false;
 					}
 
@@ -128,7 +130,7 @@ namespace SnakeMess {
 							// No more room to place apples - game over.
 							running = false;
 						else {
-							
+
 							while (true) {
 								apple.X = rand.Next(0, _screenBoundaryPoint.X);
 								apple.Y = rand.Next(0, _screenBoundaryPoint.Y);
@@ -145,7 +147,7 @@ namespace SnakeMess {
 
 					if (!addOneMoreBodyPart) {
 						_snake.RemoveAt(0);
-						
+
 						foreach (var bodyPart in _snake)
 							if (bodyPart == newH) {
 								// Death by accidental self-cannibalism.
@@ -193,8 +195,12 @@ namespace SnakeMess {
 			return collidesWithSnake;
 		}
 
-		private static bool OutOfWindow(Point point)
-		{
+		/// <summary>
+		/// Check if a point is within the console window's bounds
+		/// </summary>
+		/// <param name="point"></param>
+		/// <returns></returns>
+		private static bool OutOfWindow(Point point) {
 			return point.X < 0 || point.X >= _screenBoundaryPoint.X || point.Y < 0 || point.Y >= _screenBoundaryPoint.Y;
 		}
 	}

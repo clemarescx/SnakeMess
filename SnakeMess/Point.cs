@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace SnakeMess {
 	class Point {
@@ -15,16 +16,16 @@ namespace SnakeMess {
 			Y = input.Y;
 		}
 
-		public new bool Equals(Object obj)
-		{
-			if (!(obj is Point)) return false;
+		public new bool Equals(Object obj) {
+			if (!(obj is Point))
+				return false;
 			Point point = (Point) obj;
 			return X == point.X && Y == point.Y;
 		}
 
-		public static bool operator ==(Point point1, Point point2)
-		{
-			if (point1 == null) return false;
+		public static bool operator ==(Point point1, Point point2) {
+			if (point1.Equals(null))
+				return false;
 			return point1.Equals(point2);
 		}
 
