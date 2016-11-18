@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace RefactoredSnake{
-	class GameEntity {
+	public class GameEntity
+	{
+
+		public static string _HEAD_CHAR = "@";
+		public static string _BODY_CHAR = "0";
+		public static string _APPLE_CHAR = "$";
+
 
 		public Point Coords { get; set; }
 
-		public ConsoleColor Color;
+		public ConsoleColor Color { get; set; }
+
 		public string Character { get; set; }
 
 		public GameEntity(Point point, ConsoleColor color = ConsoleColor.Magenta, string character = "X") {
@@ -15,6 +22,7 @@ namespace RefactoredSnake{
 			Color = color;
 			Character = character;
 		}
+		public GameEntity(int x, int y) : this(new Point(x, y)){}
 
 		public GameEntity(GameEntity entity) : this(entity.Coords, entity.Color, entity.Character){}
 
@@ -23,6 +31,8 @@ namespace RefactoredSnake{
 			Coords = new Point(point);
 		}
 
+
+		/*
 		public new bool Equals(Object obj) {
 			if (!(obj is GameEntity))
 				return false;
@@ -31,14 +41,14 @@ namespace RefactoredSnake{
 			return this.Coords == gameEntity.Coords;
 		}
 
-		public static bool operator ==(GameEntity ent1, GameEntity ent2) {
-			if (ent1.Equals(null))
-				return false;
-			return ent1.Equals(ent2);
+		public static bool operator ==(GameEntity ent1, GameEntity ent2)
+		{
+			return ent1 != null && ent1.Equals(ent2);
 		}
 
 		public static bool operator !=(GameEntity ent1, GameEntity ent2) {
 			return !(ent1 == ent2);
 		}
+		*/
 	}
 }

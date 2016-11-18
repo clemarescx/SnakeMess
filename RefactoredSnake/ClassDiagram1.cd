@@ -3,21 +3,21 @@
   <Class Name="RefactoredSnake.Controller" Collapsed="true">
     <Position X="6.5" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAgBAAAAAAAABkAAAAAAAAAAAQAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAgBAAAAAAAAAEgAAAAAAAAAAQAAAAAAABAAAAAA=</HashCode>
       <FileName>Controller.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="RefactoredSnake.GameEntity">
     <Position X="4.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAQAAAgABACiA=</HashCode>
+      <HashCode>CAAAAAAAAAAAAAAAgAAAAAAAAAAAAAIAQIAAgABACiA=</HashCode>
       <FileName>GameEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="RefactoredSnake.Model" Collapsed="true">
     <Position X="9.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAABAQAAAAAAAAAAAAAAAAEAAAACAAA=</HashCode>
+      <HashCode>ABAAAAAAAAAAAAABAAAAAAAAAAAIAAAAAQEAAAACAAA=</HashCode>
       <FileName>Model.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -33,13 +33,6 @@
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
       <FileName>Direction.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
-  <Enum Name="RefactoredSnake.GameCommand">
-    <Position X="3" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAgAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAQI=</HashCode>
-      <FileName>GameCommand.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

@@ -28,7 +28,7 @@ namespace RefactoredSnake {
 		private void PaintEntity(GameEntity entity)
 		{
 			Console.ForegroundColor = entity.Color;
-			Console.SetCursorPosition(entity.X, entity.Y);
+			Console.SetCursorPosition(entity.Coords.X, entity.Coords.Y);
 			Console.Write(entity.Character);
 		}
 
@@ -39,6 +39,7 @@ namespace RefactoredSnake {
 		/// </summary>
 		public void PaintEntities(List<GameEntity> entities)
 		{
+			Console.Clear();
 			//
 			foreach (var entity in entities)
 			{

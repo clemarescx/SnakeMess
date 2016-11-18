@@ -12,20 +12,26 @@ namespace RefactoredSnake {
 
 		internal GameEntity Apple { get; set; }
 
+		public Snake Snake { get; }
+
 		public Model()
 		{
 			Apple = new GameEntity(new Point(30,30));
+			Snake = new Snake();
 			Entities = new List<GameEntity>();
+
+			UpdateEntities();
+
 		}
 
 		// View board = new View();
 		// _board.paintEntities(entities);
 
 
-		public void updateEntities()
+		public void UpdateEntities()
 		{
-			Entities.RemoveAll();
-			Entities.Add(Snake);
+			Entities.RemoveRange(0,Entities.Count);
+			Entities.AddRange(Snake.Body);
 			Entities.Add(Apple);
 		}
 

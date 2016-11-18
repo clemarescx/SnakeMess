@@ -97,7 +97,14 @@
             isDerived="false"
             isDerivedUnion="false"
             aggregation="None"
-            isComposite="false" />
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="5e742b71-584e-494f-973f-7e1727d00b88"
+                LastKnownName="GameEntity"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </property>
           <property
             Id="fc548642-41a4-491e-a1dd-9de2dcca5ccc"
             name="PrintBuffer"
@@ -218,6 +225,48 @@
             isQuery="false" />
         </ownedOperationsInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="5e742b71-584e-494f-973f-7e1727d00b88"
+        name="GameEntity"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="f87444f9-6842-44c1-9d89-f807cedc0e2e"
+            name="Coords"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="29d78f42-5f2a-4e98-93d4-ceb8b06cb56e"
+                LastKnownName="Point"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="29d78f42-5f2a-4e98-93d4-ceb8b06cb56e"
+        name="Point"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="cef910d4-255c-40a9-98e1-2ee9e6caaf22"
+        name="GameEnti" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

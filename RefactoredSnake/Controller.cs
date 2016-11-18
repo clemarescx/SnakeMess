@@ -10,16 +10,14 @@ namespace RefactoredSnake
 	class Controller
 	{
 		private static View _board;
-		private static Model _points;
-		private static GameEntity Apple;
+		private static Model _model;
+	
 
 		public Controller()
 		{
 			_board = new View(this);
-			_points = new Model();
-			Apple = new GameEntity(40,20);
-
-			_points.add(Apple);
+			_model = new Model();
+			
 
 		}
 
@@ -29,15 +27,40 @@ namespace RefactoredSnake
 			bool running = true;
 
 			//view test
-			_board.PaintEntities(_points.Entities);
-			Console.ReadKey(true);
+			_board.PaintEntities(_model.Entities);
+			//Console.ReadKey(true);
 			// gameloop
+
+
+			// Test variable for the loop;
+			Point testPoint = new Point(_model.Snake.Head.Coords);
+			int testX = 1;
+			while (true)
+			{
+				//Read input
+
+				var inputKey = Console.ReadKey(true);
+				if (inputKey.Key == ConsoleKey.Escape)
+					break;
+				//calculate
+				testPoint.X += testX;
+				_model.Snake.Move(testPoint);
+				//update
+				_model.UpdateEntities();
+				//paint			
+				_board.PaintEntities(_model.Entities);
+
+			}
 
 		}
 
 
 		void run()
 		{
+			while (true)
+			{
+				//
+			}
 			
 		}
 
@@ -51,8 +74,8 @@ namespace RefactoredSnake
 		private void place(GameEntity entity)
 		{
 			Random r = new Random();
-			int x = r.Next(_board.X);
-			int y = r.Next(_board.Y);
+			int x = r.Next(0, _board.X);
+			int y = r.Next(0, _board.Y);
 
 		}
 

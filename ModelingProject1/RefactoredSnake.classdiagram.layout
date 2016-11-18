@@ -50,5 +50,19 @@
         <classShapeMoniker Id="e2ce37a3-537d-4a1a-8346-8c1fc27b1844" />
       </nodes>
     </associationConnector>
+    <classShape Id="ffa3e35a-26f1-4bc9-b09f-1587aaddcaa9" absoluteBounds="6.375, 2.375, 1.5, 1.0624999801317849" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="a6fa82ac-2188-430d-b7e3-862430427215" LastKnownName="GameEntity" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="104e7025-df76-4430-b48e-549c409c3a29" absoluteBounds="6.39, 2.765, 1.4700000000000002, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="eba48e88-d4e4-430e-95fd-da1b3157b759" absoluteBounds="6.39, 3.1363281125823654, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d01430f4-51f9-4e1c-8fa4-7c1eae6f55b1" absoluteBounds="6.5, 0.5, 1.5, 0.90234373509883881" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="4635ceaf-504c-4ee8-ab01-4d83ea65010c" LastKnownName="Point" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="1c6fee64-09be-43ee-8e8a-530dfc38f667" absoluteBounds="6.515, 0.89000000000000012, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="f2d8e74e-fe32-4cf0-851c-3763e29926db" absoluteBounds="6.515, 1.1011718675494193, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </logicalClassDesignerDiagram>

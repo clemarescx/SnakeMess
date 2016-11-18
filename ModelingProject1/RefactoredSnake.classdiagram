@@ -47,6 +47,9 @@
           </property>
           <property Id="ec0c8006-70ba-4390-8fbc-fc8d4c89bace" name="Apple" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="d309f1da-3750-449a-a3d1-c0fe95a61f85" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a4dc13df-0214-41b4-ac19-c4e05a126a57" LastKnownName="GameEntity" />
+            </type_NamedElement>
           </property>
           <property Id="e5d3cc51-7c51-4477-8365-df641fa73c24" name="PrintBuffer" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="fc548642-41a4-491e-a1dd-9de2dcca5ccc" />
@@ -101,6 +104,34 @@
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a6fa82ac-2188-430d-b7e3-862430427215" name="GameEntity" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="5e742b71-584e-494f-973f-7e1727d00b88" />
+        <ownedAttributesInternal>
+          <property Id="e6460407-29b6-4964-8435-c3c110c491b7" name="Coords" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f87444f9-6842-44c1-9d89-f807cedc0e2e" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="68982033-06b0-49d8-af7e-788e1db7fcd3" LastKnownName="Point" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="4635ceaf-504c-4ee8-ab01-4d83ea65010c" name="Point" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="29d78f42-5f2a-4e98-93d4-ceb8b06cb56e" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="a4dc13df-0214-41b4-ac19-c4e05a126a57" name="GameEntity" isAbstract="false" isLeaf="false" cachedFullName="ModelingProject1::GameEntity">
+        <elementDefinition Id="5e742b71-584e-494f-973f-7e1727d00b88" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="68982033-06b0-49d8-af7e-788e1db7fcd3" name="Point" isAbstract="false" isLeaf="false" cachedFullName="ModelingProject1::Point">
+        <elementDefinition Id="29d78f42-5f2a-4e98-93d4-ceb8b06cb56e" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="51243d97-311a-4631-80dc-a4b004927cc2" name="ModelingProject1">
     <elementDefinition Id="94536aad-eaf7-41b0-9a3b-6e08b7c9e052" />
