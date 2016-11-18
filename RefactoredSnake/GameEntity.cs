@@ -5,32 +5,30 @@ using System.Diagnostics;
 namespace RefactoredSnake{
 	class GameEntity {
 
-		public int X { get; set; }
-		public int Y { get; set; }
+		public Point Coords { get; set; }
 
 		public ConsoleColor Color;
 		public string Character { get; set; }
 
-		public GameEntity(int x = 0, int y = 0, ConsoleColor color = ConsoleColor.Magenta, string character = "X") {
-			X = x;
-			Y = y;
+		public GameEntity(Point point, ConsoleColor color = ConsoleColor.Magenta, string character = "X") {
+			Coords = new Point(point);
 			Color = color;
 			Character = character;
 		}
 
-		public GameEntity(GameEntity entity) : this(entity.X, entity.Y, entity.Color, entity.Character){}
+		public GameEntity(GameEntity entity) : this(entity.Coords, entity.Color, entity.Character){}
 
-		public void updateCoords(int newX, int newY)
+		public void UpdateCoords(Point point)
 		{
-			X = newX;
-			Y = newY;
+			Coords = new Point(point);
 		}
 
 		public new bool Equals(Object obj) {
 			if (!(obj is GameEntity))
 				return false;
 			GameEntity gameEntity = (GameEntity) obj;
-			return X == gameEntity.X && Y == gameEntity.Y;
+			//return X == gameEntity.X && Y == gameEntity.Y;
+			return this.Coords == gameEntity.Coords;
 		}
 
 		public static bool operator ==(GameEntity ent1, GameEntity ent2) {

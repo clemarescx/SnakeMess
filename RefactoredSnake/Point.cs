@@ -2,7 +2,9 @@
 using System.Diagnostics;
 
 namespace RefactoredSnake {
+
 	public class Point {
+
 		public int X;
 		public int Y;
 

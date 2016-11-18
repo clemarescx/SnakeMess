@@ -14,6 +14,7 @@ namespace RefactoredSnake {
 
 		public Model()
 		{
+			Apple = new GameEntity(new Point(30,30));
 			Entities = new List<GameEntity>();
 		}
 

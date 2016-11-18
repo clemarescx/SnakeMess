@@ -10,7 +10,7 @@
   <Class Name="RefactoredSnake.GameEntity">
     <Position X="4.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAgAAAAABAAAAAAAAAAAAAgAAAaiA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAQAAAgABACiA=</HashCode>
       <FileName>GameEntity.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -28,13 +28,6 @@
       <FileName>View.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="RefactoredSnake.IGameCommands">
-    <Position X="0.5" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IGameCommands.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Enum Name="RefactoredSnake.Direction">
     <Position X="1" Y="4.75" Width="1.5" />
     <TypeIdentifier>
