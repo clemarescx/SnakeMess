@@ -39,8 +39,6 @@ namespace RefactoredSnake {
 		/// </summary>
 		public void PaintEntities(List<GameEntity> entities)
 		{
-			Console.Clear();
-			//
 			foreach (var entity in entities)
 			{
 				PaintEntity(entity);

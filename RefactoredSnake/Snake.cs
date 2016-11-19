@@ -6,6 +6,7 @@ namespace RefactoredSnake
 {
 	public class Snake
 	{
+		private Queue<GameEntity> BodyQ { get; }
 		public List<GameEntity> Body { get; private set; }
 
 		public GameEntity Head;
@@ -60,6 +61,7 @@ namespace RefactoredSnake
 
 			Body.Add(new GameEntity(newHeadPos, ConsoleColor.Yellow, GameEntity._HEAD_CHAR));
 		}
+
 
 		private GameEntity Dequeue()
 		{
