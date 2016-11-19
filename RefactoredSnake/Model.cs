@@ -5,24 +5,38 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace RefactoredSnake {
-
-	class Model {
+	internal class Model {
 		public List<PrintableEntity> PrintBuffer { get; }
 		internal PrintableEntity Apple { get; set; }
 		public Snake Snake { get; }
-
-		private Point screenDimensions;
+		private readonly Random _rand;
+		public Point ScreenDimensions { private get; set; }
 
 		public Model() {
-			Apple = new PrintableEntity(new Point(30, 30));
-			Snake = new Snake();
+			
+			_rand = new Random();
+			Apple = new PrintableEntity(new Point(30, 30), PrintableEntity.AppleColor,PrintableEntity.AppleChar);
+			Snake = new Snake(new Point(10,10));
 			PrintBuffer = new List<PrintableEntity>();
 
 			UpdatePrintableBuffer();
 		}
 
-		public void processCommand(ConsoleKey command) {
+		public Point updateDirection(Point newDirection)
+		{
+			if (isValidNewDirection(newDirection))
+			{
+				return newDirection;
+			}
+			return Snake.CurrentDirection;
+		}
 
+		private bool isValidNewDirection(Point newDirection)
+		{
+			Point backwards = new Point(-newDirection.X, -newDirection.Y);
+
+			return (newDirection != backwards) && 
+				(newDirection != Snake.CurrentDirection);
 		}
 
 		public void SnakeMoves(Point newHeadPos)
@@ -37,9 +51,27 @@ namespace RefactoredSnake {
 			Snake.AddHead(appleCoords);
 		}
 
-		public void PlaceApple(Point newCoords)
+		public bool isOutOfBounds(Point point) {
+			return point.X < 0 || 
+				point.Y < 0 || 
+				point.X >= ScreenDimensions.X || 
+				point.Y >= ScreenDimensions.Y;
+		}
+		public void PlaceApple()
 		{
-			Apple.Coords = newCoords;
+			Point newAppleSpot = GetRandomPoint();
+			while (CollidesWithSnake(newAppleSpot)){
+				newAppleSpot = GetRandomPoint();
+			}
+			Apple.Coords = newAppleSpot;
+		}
+
+		public Point GetRandomPoint()
+		{
+			int randX = _rand.Next(0, ScreenDimensions.X);
+			int randY = _rand.Next(0, ScreenDimensions.Y);
+
+			return new Point(randX, randY);
 		}
 
 		public bool CollidesWithSnake(Point point) {

@@ -13,28 +13,33 @@ namespace RefactoredSnake
 		private static readonly string _HEAD_CHAR = PrintableEntity.HeadChar;
 		private static readonly string _BODY_CHAR = PrintableEntity.BodyChar;
 
-		public PrintableEntity Head;
-		public PrintableEntity Tail;
+		//public PrintableEntity Head;
+		//public PrintableEntity Tail;
+
+		public Point CurrentDirection;
 
 		public int BodyPartsCount => Count;
 
 
-		public Snake(Point point, int length)
+		public Snake(Point startingCoords, Point direction, int length)
 		{
-			Add(new PrintableEntity(point, PrintableEntity.SnakeColor, _HEAD_CHAR));
+			Add(new PrintableEntity(startingCoords, PrintableEntity.SnakeColor, _HEAD_CHAR));
 			for (int i = 0; i < length-1; i++)
 			{
-				Insert(0, new PrintableEntity(point, PrintableEntity.SnakeColor, _BODY_CHAR));
+				Insert(0, new PrintableEntity(startingCoords, PrintableEntity.SnakeColor, _BODY_CHAR));
 			}
+			/*
 			Head = this.Last();
 			Tail = this.First();
+			*/
+			CurrentDirection = direction;
 		}
 
 		/// <summary>
 		/// Construct the default snake with custom coordinates
 		/// </summary>
-		/// <param name="point"></param>
-		public Snake(Point point): this(point, 4) { }
+		/// <param name="startingCoords"></param>
+		public Snake(Point startingCoords): this(startingCoords,new Point(0,1), 4) { }
 
 		/// <summary>
 		/// The default constructor places the snake at the original
@@ -46,6 +51,17 @@ namespace RefactoredSnake
 		{
 			Add(new PrintableEntity(point, PrintableEntity.SnakeColor, _HEAD_CHAR));
 		}
+
+		public PrintableEntity getHead()
+		{
+			return this.Last();
+		}
+
+		public PrintableEntity getTail()
+		{
+			return this.First();
+		}
+
 	
 	}
 }

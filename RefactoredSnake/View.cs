@@ -26,7 +26,7 @@ namespace RefactoredSnake {
 			Console.Title = "Westerdals Oslo ACT - SNAKE";
 
 			X = Console.WindowWidth;
-			Y = Console.BufferHeight;
+			Y = Console.WindowHeight;
 			Console.CursorVisible = false;
 		}
 

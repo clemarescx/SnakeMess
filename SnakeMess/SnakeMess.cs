@@ -82,13 +82,10 @@ namespace SnakeMess {
 			Console.SetCursorPosition(_apple.X, _apple.Y);
 			
 			Console.Write(_apple_char);
-
-
 			
 			_time = new Stopwatch();
 			_time.Start();
 			#endregion
-
 
 			#region Game Loop Starts
 			/**
