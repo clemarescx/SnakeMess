@@ -6,67 +6,74 @@ using System.Threading.Tasks;
 
 namespace RefactoredSnake {
 
-	class Model
-	{
-		public List<GameEntity> PrintBuffer { get; }
-		internal GameEntity Apple { get; set; }
+	class Model {
+		public List<PrintableEntity> PrintBuffer { get; }
+		internal PrintableEntity Apple { get; set; }
 		public Snake Snake { get; }
 
-		public Model()
-		{
-			Apple = new GameEntity(new Point(30,30));
+		private Point screenDimensions;
+
+		public Model() {
+			Apple = new PrintableEntity(new Point(30, 30));
 			Snake = new Snake();
-			PrintBuffer = new List<GameEntity>();
+			PrintBuffer = new List<PrintableEntity>();
 
-			UpdateEntities();
+			UpdatePrintableBuffer();
+		}
+
+		public void processCommand(ConsoleKey command) {
 
 		}
 
-		public void processCommand(ConsoleKey command)
+		public void snakeMoves(Point newHeadPos)
 		{
-			
+			Snake.Last().Character = PrintableEntity.BodyChar;
+			Snake.AddHead(newHeadPos);
+			Snake.First().Character = PrintableEntity.EmptyChar;
 		}
 
-		public void UpdateEntities()
+		public void SnakeEatsApple(Point appleCoords) {
+			Snake.Last().Character = PrintableEntity.BodyChar;
+			Snake.AddHead(appleCoords);
+		}
+
+		public void placeApple(Point newCoords)
 		{
-			PrintBuffer.RemoveRange(0,PrintBuffer.Count);
-			PrintBuffer.AddRange(Snake.Body);
+			Apple.Coords = newCoords;
+		}
+
+		public bool CollidesWithSnake(Point point) {
+			foreach (var bodyPart in Snake)
+				if (bodyPart.Coords == point)
+					return true;
+			return false;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public void UpdatePrintableBuffer() {
+			PrintBuffer.Clear();
+				
+			PrintBuffer.AddRange(Snake);
 			PrintBuffer.Add(Apple);
 		}
 
-		public bool contains(GameEntity entity)
+		public void refreshSnake()
 		{
+			while(Snake[0].Character.Equals(PrintableEntity.EmptyChar))
+				Snake.RemoveAt(0);
+		}
+
+		public bool contains(PrintableEntity entity) {
 			return PrintBuffer.Contains(entity);
 		}
 
-		public bool add(GameEntity entity)
-		{
-			if (PrintBuffer.Contains(entity)) return false;
+		public bool add(PrintableEntity entity) {
+			if (PrintBuffer.Contains(entity))
+				return false;
 			PrintBuffer.Add(entity);
 			return true;
-		}
-
-
-
-		public Point Move(Point newHeadPos) {
-			Enqueue(newHeadPos);
-			GameEntity oldTail = Dequeue();
-
-			return oldTail.Coords;
-		}
-		
-		public void Enqueue(Point newHeadPos) {
-			if (Head != null)
-				Head.Character = GameEntity.BodyChar;
-
-			Body.Add(new GameEntity(newHeadPos, ConsoleColor.Yellow, GameEntity.HeadChar));
-		}
-
-		private GameEntity Dequeue() {
-			var tail = Tail;
-			Body.RemoveAt(0);
-			tail.Character = " ";
-			return tail;
 		}
 
 	}

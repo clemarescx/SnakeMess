@@ -6,25 +6,25 @@ using System.Runtime.CompilerServices;
 
 namespace RefactoredSnake
 {
-	public class Snake : List<GameEntity>
+	public class Snake : List<PrintableEntity>
 	{
 		
-		//public List<GameEntity> BodyL { get; private set; }
-		private static readonly string _HEAD_CHAR = GameEntity.HeadChar;
-		private static readonly string _BODY_CHAR = GameEntity.BodyChar;
+		//public List<PrintableEntity> BodyL { get; private set; }
+		private static readonly string _HEAD_CHAR = PrintableEntity.HeadChar;
+		private static readonly string _BODY_CHAR = PrintableEntity.BodyChar;
 
-		public GameEntity Head;
-		public GameEntity Tail;
+		public PrintableEntity Head;
+		public PrintableEntity Tail;
 
 		public int BodyPartsCount => Count;
 
 
 		public Snake(Point point, int length)
 		{
-			Add(new GameEntity(point, GameEntity.SnakeColor, _HEAD_CHAR));
+			Add(new PrintableEntity(point, PrintableEntity.SnakeColor, _HEAD_CHAR));
 			for (int i = 0; i < length-1; i++)
 			{
-				Insert(0, new GameEntity(point, GameEntity.SnakeColor, _BODY_CHAR));
+				Insert(0, new PrintableEntity(point, PrintableEntity.SnakeColor, _BODY_CHAR));
 			}
 			Head = this.Last();
 			Tail = this.First();
@@ -42,6 +42,10 @@ namespace RefactoredSnake
 		/// </summary>
 		public Snake() : this(new Point(10, 10)) { }
 
+		public void AddHead(Point point)
+		{
+			Add(new PrintableEntity(point, PrintableEntity.SnakeColor, _HEAD_CHAR));
+		}
 	
 	}
 }

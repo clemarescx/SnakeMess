@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace RefactoredSnake {
 	class Controller {
-		private static View _board;
+		private static Point ViewDims; 
+		private static View _view;
 		private static Model _model;
 
 		static Thread _inputThread;
@@ -17,8 +18,9 @@ namespace RefactoredSnake {
 		private static ConsoleKey _key;
 
 		public Controller() {
-			_board = new View(this);
+			_view = new View(this);
 			_model = new Model();
+			ViewDims = new Point(_view.X, _view.Y);
 		}
 
 		public static void Main(string[] args) {
@@ -27,7 +29,7 @@ namespace RefactoredSnake {
 			bool running = true;
 
 			//view test
-			_board.PaintEntities(_model.PrintBuffer);
+			_view.PaintEntities(_model.PrintBuffer);
 			//Console.ReadKey(true);
 
 
@@ -52,19 +54,20 @@ namespace RefactoredSnake {
 				if (_key == ConsoleKey.Escape)
 				{
 					Console.WriteLine("ARHGHRHKGFH");
+					Console.ReadKey(true);
 					running = Quit();
 				}
 					
 				
 				//calculate
 				testPoint.X += testX;
-				_model.Snake.Move(testPoint);
+				_model.snakeMoves(testPoint);
 				
 				//update
-				_model.UpdateEntities();
-			
+				_model.UpdatePrintableBuffer();
 				//paint			
-				_board.PaintEntities(_model.PrintBuffer);
+				_view.PaintEntities(_model.PrintBuffer);
+				_model.refreshSnake();
 
 			}
 
@@ -84,19 +87,19 @@ namespace RefactoredSnake {
 		static void Initiate()
 		{
 			
-			_inputThread = new Thread(_board.ListenForInput);
+			_inputThread = new Thread(_view.ListenForInput);
 		}
 
-		private void place(GameEntity entity) {
+		private void place(PrintableEntity entity) {
 			Random r = new Random();
-			int x = r.Next(0, _board.X);
-			int y = r.Next(0, _board.Y);
+			int x = r.Next(0, _view.X);
+			int y = r.Next(0, _view.Y);
 
 		}
 
 		private void Suscribe()
 		{
-			_board.KeyPressed += OnKeyPressed;
+			_view.KeyPressed += OnKeyPressed;
 		}
 
 		public void OnKeyPressed(object o, InputEventArgs input)

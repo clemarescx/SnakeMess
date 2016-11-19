@@ -38,7 +38,7 @@ namespace RefactoredSnake {
 		/// properties
 		/// </summary>
 		/// <param name="entity"></param>
-		private void PaintEntity(GameEntity entity)
+		private void PaintEntity(PrintableEntity entity)
 		{
 			Console.ForegroundColor = entity.Color;
 			Console.SetCursorPosition(entity.Coords.X, entity.Coords.Y);
@@ -50,8 +50,9 @@ namespace RefactoredSnake {
 		/// according to their respective properties 
 		/// (coordinates, colour, sign)
 		/// </summary>
-		public void PaintEntities(List<GameEntity> entities)
+		public void PaintEntities(List<PrintableEntity> entities)
 		{
+			//Console.Clear(); <-- that's cheating!
 			foreach (var entity in entities)
 			{
 				PaintEntity(entity);
