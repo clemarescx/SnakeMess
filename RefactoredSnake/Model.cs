@@ -8,43 +8,66 @@ namespace RefactoredSnake {
 
 	class Model
 	{
-		public List<GameEntity> Entities { get; }
-
+		public List<GameEntity> PrintBuffer { get; }
 		internal GameEntity Apple { get; set; }
-
 		public Snake Snake { get; }
 
 		public Model()
 		{
 			Apple = new GameEntity(new Point(30,30));
 			Snake = new Snake();
-			Entities = new List<GameEntity>();
+			PrintBuffer = new List<GameEntity>();
 
 			UpdateEntities();
 
 		}
 
-		// View board = new View();
-		// _board.paintEntities(entities);
-
+		public void processCommand(ConsoleKey command)
+		{
+			
+		}
 
 		public void UpdateEntities()
 		{
-			Entities.RemoveRange(0,Entities.Count);
-			Entities.AddRange(Snake.Body);
-			Entities.Add(Apple);
+			PrintBuffer.RemoveRange(0,PrintBuffer.Count);
+			PrintBuffer.AddRange(Snake.Body);
+			PrintBuffer.Add(Apple);
 		}
 
 		public bool contains(GameEntity entity)
 		{
-			return Entities.Contains(entity);
+			return PrintBuffer.Contains(entity);
 		}
 
 		public bool add(GameEntity entity)
 		{
-			if (Entities.Contains(entity)) return false;
-			Entities.Add(entity);
+			if (PrintBuffer.Contains(entity)) return false;
+			PrintBuffer.Add(entity);
 			return true;
 		}
+
+
+
+		public Point Move(Point newHeadPos) {
+			Enqueue(newHeadPos);
+			GameEntity oldTail = Dequeue();
+
+			return oldTail.Coords;
+		}
+		
+		public void Enqueue(Point newHeadPos) {
+			if (Head != null)
+				Head.Character = GameEntity.BodyChar;
+
+			Body.Add(new GameEntity(newHeadPos, ConsoleColor.Yellow, GameEntity.HeadChar));
+		}
+
+		private GameEntity Dequeue() {
+			var tail = Tail;
+			Body.RemoveAt(0);
+			tail.Character = " ";
+			return tail;
+		}
+
 	}
 }

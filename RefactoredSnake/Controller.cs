@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
@@ -11,12 +12,13 @@ namespace RefactoredSnake {
 		private static View _board;
 		private static Model _model;
 
+		static Thread _inputThread;
+
+		private static ConsoleKey _key;
 
 		public Controller() {
 			_board = new View(this);
 			_model = new Model();
-
-
 		}
 
 		public static void Main(string[] args) {
@@ -25,7 +27,7 @@ namespace RefactoredSnake {
 			bool running = true;
 
 			//view test
-			_board.PaintEntities(_model.Entities);
+			_board.PaintEntities(_model.PrintBuffer);
 			//Console.ReadKey(true);
 
 
@@ -33,17 +35,26 @@ namespace RefactoredSnake {
 			Point testPoint = new Point(_model.Snake.Head.Coords);
 			int testX = 1;
 
+			Initiate();
+
+
+			Stopwatch timer = new Stopwatch();
+			timer.Start();
 			// gameloop
-			while (true) {
+			while (running) {
 
-
-				// Read input from View 
+				// Read keyPressed from View 
 				// via delegate + Events ? (Observer pattern)
-				//
-
-				var inputKey = Console.ReadKey(true);
-				if (inputKey.Key == ConsoleKey.Escape)
-					break;
+				if (timer.ElapsedMilliseconds < 100) continue;
+				timer.Restart();
+				//var inputKey = Console.ReadKey(true);
+				//Console.ReadKey(true);
+				if (_key == ConsoleKey.Escape)
+				{
+					Console.WriteLine("ARHGHRHKGFH");
+					running = Quit();
+				}
+					
 				
 				//calculate
 				testPoint.X += testX;
@@ -53,26 +64,45 @@ namespace RefactoredSnake {
 				_model.UpdateEntities();
 			
 				//paint			
-				_board.PaintEntities(_model.Entities);
+				_board.PaintEntities(_model.PrintBuffer);
 
 			}
 
+		}
+
+		private static bool Quit()
+		{
+			//_inputThread.Join();
+			return false;
 		}
 
 
 		void run() {
-			while (true) {
-				//
-			}
+			
 		}
 
-		void intiate() { }
+		static void Initiate()
+		{
+			
+			_inputThread = new Thread(_board.ListenForInput);
+		}
 
 		private void place(GameEntity entity) {
 			Random r = new Random();
 			int x = r.Next(0, _board.X);
 			int y = r.Next(0, _board.Y);
 
+		}
+
+		private void Suscribe()
+		{
+			_board.KeyPressed += OnKeyPressed;
+		}
+
+		public void OnKeyPressed(object o, InputEventArgs input)
+		{
+			Console.WriteLine("Key {0} was pressed", input.KeyPressed);
+			_key = input.KeyPressed.Key;
 		}
 
 	}

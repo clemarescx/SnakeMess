@@ -4,10 +4,10 @@ namespace RefactoredSnake
 {
 	public class InputEventArgs : EventArgs
 	{
-		public ConsoleKeyInfo input;
-		public InputEventArgs(ConsoleKeyInfo input)
+		public ConsoleKeyInfo KeyPressed;
+		public InputEventArgs(ConsoleKeyInfo key)
 		{
-			this.input = input;
+			KeyPressed = key;
 		}
 		
 	}

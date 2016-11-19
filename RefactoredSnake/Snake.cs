@@ -1,31 +1,33 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace RefactoredSnake
 {
-	public class Snake
+	public class Snake : List<GameEntity>
 	{
-		private Queue<GameEntity> BodyQ { get; }
-		public List<GameEntity> Body { get; private set; }
+		
+		//public List<GameEntity> BodyL { get; private set; }
+		private static readonly string _HEAD_CHAR = GameEntity.HeadChar;
+		private static readonly string _BODY_CHAR = GameEntity.BodyChar;
 
 		public GameEntity Head;
 		public GameEntity Tail;
 
-		public int BodyPartsCount => Body.Count;
+		public int BodyPartsCount => Count;
 
 
 		public Snake(Point point, int length)
 		{
-			Body = new List<GameEntity>();
-			for (int i = 0; i < length; i++)
+			Add(new GameEntity(point, GameEntity.SnakeColor, _HEAD_CHAR));
+			for (int i = 0; i < length-1; i++)
 			{
-				Enqueue(point);
+				Insert(0, new GameEntity(point, GameEntity.SnakeColor, _BODY_CHAR));
 			}
-			Head = Body.Last();
-			Tail = Body.First();
-
-
+			Head = this.Last();
+			Tail = this.First();
 		}
 
 		/// <summary>
@@ -40,36 +42,6 @@ namespace RefactoredSnake
 		/// </summary>
 		public Snake() : this(new Point(10, 10)) { }
 
-
-
-		public Point Move(Point newHeadPos)
-		{
-			Enqueue(newHeadPos);
-			GameEntity oldTail = Dequeue();
-
-			return oldTail.Coords;
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="newHeadPos"></param>
-
-		public void Enqueue(Point newHeadPos)
-		{
-			if( Head != null ) Head.Character = GameEntity._BODY_CHAR;
-
-			Body.Add(new GameEntity(newHeadPos, ConsoleColor.Yellow, GameEntity._HEAD_CHAR));
-		}
-
-
-		private GameEntity Dequeue()
-		{
-			var tail = Tail;
-			Body.RemoveAt(0);
-			tail.Character = " ";
-			return tail;
-		}
-
+	
 	}
 }

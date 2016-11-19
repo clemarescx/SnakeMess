@@ -6,9 +6,11 @@ namespace RefactoredSnake{
 	public class GameEntity
 	{
 
-		public static string _HEAD_CHAR = "@";
-		public static string _BODY_CHAR = "0";
-		public static string _APPLE_CHAR = "$";
+		public static string HeadChar = "@";
+		public static string BodyChar = "0";
+		public static string AppleChar = "$";
+		public static ConsoleColor SnakeColor = ConsoleColor.Yellow;
+		public static ConsoleColor AppleColor = ConsoleColor.Green;
 
 
 		public Point Coords { get; set; }
@@ -17,7 +19,10 @@ namespace RefactoredSnake{
 
 		public string Character { get; set; }
 
-		public GameEntity(Point point, ConsoleColor color = ConsoleColor.Magenta, string character = "X") {
+		public GameEntity(
+			Point point, 
+			ConsoleColor color = ConsoleColor.Magenta, 
+			string character = "X") {
 			Coords = new Point(point);
 			Color = color;
 			Character = character;
