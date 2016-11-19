@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command.cs" />
     <Compile Include="Direction.cs" />
+    <Compile Include="InputListener.cs" />
     <Compile Include="PrintableEntity.cs" />
     <Compile Include="InputEventArgs.cs" />
     <Compile Include="Point.cs" />

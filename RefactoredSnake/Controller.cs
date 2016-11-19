@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Environment;
 
 namespace RefactoredSnake {
 	class Controller {
@@ -13,100 +14,144 @@ namespace RefactoredSnake {
 		private static View _view;
 		private static Model _model;
 
-		static Thread _inputThread;
-
-		private static ConsoleKey _key;
+		//static Thread _inputThread;
+		//private static InputListener _inputListener;
+		//private static ConsoleKeyInfo _inputKey;
 
 		public Controller() {
 			_view = new View(this);
 			_model = new Model();
+			//_inputListener = new InputListener();
 			ViewDims = new Point(_view.X, _view.Y);
 		}
 
 		public static void Main(string[] args) {
 
 			Controller gameLogic = new Controller();
-			bool running = true;
 
+			/*
+			_inputListener = new InputListener();
+			gameLogic.Subscribe(_inputListener);
+			_inputThread = new Thread(_inputListener.Run);
+			_inputThread.Start();
+			*/
+
+			bool running = true;
+			bool paused = false;
+
+			Point newDirection = new Point();
 			//view test
 			_view.PaintEntities(_model.PrintBuffer);
-			//Console.ReadKey(true);
-
 
 			// Test variable for the loop;
 			Point testPoint = new Point(_model.Snake.Head.Coords);
 			int testX = 1;
 
-			Initiate();
-
 
 			Stopwatch timer = new Stopwatch();
 			timer.Start();
-			// gameloop
+
+			#region Game Loop
+			// gameloop start
+
 			while (running) {
 
 				// Read keyPressed from View 
-				// via delegate + Events ? (Observer pattern)
-				if (timer.ElapsedMilliseconds < 100) continue;
-				timer.Restart();
-				//var inputKey = Console.ReadKey(true);
-				//Console.ReadKey(true);
-				if (_key == ConsoleKey.Escape)
-				{
-					Console.WriteLine("ARHGHRHKGFH");
-					Console.ReadKey(true);
-					running = Quit();
+				var input = _view.GetInputKey();
+				switch (input) {
+					case Command.Quit: {
+							running = false;
+							continue;
+						}
+					case Command.Pause:
+						paused = !paused;
+						break;
+					case Command.Up:
+						break;
+					case Command.Right:
+						break;
+					case Command.Down:
+						break;
+					case Command.Left:
+						break;
+
 				}
-					
-				
+
+				// via delegate + Events ? (Observer pattern)
+				//var inputKey = Console.GetInputKey(true);
+				//Console.GetInputKey(true);
+				//if(Console.KeyAvailable)
+
+				/*
+				if (_inputKey.Key == ConsoleKey.Spacebar)
+				{
+					Console.SetCursorPosition(0, 0);
+					Console.WriteLine("Key {0} was pressed {1} times", _inputKey.Key, ++pausedcount);
+					paused = !paused;
+				}
+				*/
+
+				if (paused || timer.ElapsedMilliseconds < 100)
+					continue;
+
+				timer.Restart();
+
 				//calculate
 				testPoint.X += testX;
-				_model.snakeMoves(testPoint);
-				
-				//update
-				_model.UpdatePrintableBuffer();
-				//paint			
-				_view.PaintEntities(_model.PrintBuffer);
-				_model.refreshSnake();
+				if (isOutOfBounds(testPoint)) {
+					running = !false;
+					continue;
+				}
+				else {
+					_model.SnakeMoves(testPoint);
+
+					// update
+					_model.UpdatePrintableBuffer();
+
+					//paint			
+					_view.PaintEntities(_model.PrintBuffer);
+
+					//
+					_model.RefreshSnake();
+				}
 
 			}
 
 		}
 
-		private static bool Quit()
+
+		#endregion
+
+
+		private static bool isOutOfBounds(Point point)
 		{
-			//_inputThread.Join();
-			return false;
+			return point.X < 0 || point.Y < 0 || point.X >= ViewDims.X || point.Y >= ViewDims.Y;
+
 		}
 
+		/*
+		static void Initiate(InputListener listener)
+		{
+			_inputThread = new Thread(listener.Run);
+			Subscribe(listener);
+			_inputThread.Start();
+		}
+		*/
 
-		void run() {
+			/*
+		private void Subscribe(InputListener listener)
+		{
+			listener.KeyPressed += OnKeyPressed;
+		}
+		*/
+
+		/**
+		public static void OnKeyPressed(object o, InputEventArgs input)
+		{
+			_inputKey = input.KeyPressed;
 			
 		}
-
-		static void Initiate()
-		{
-			
-			_inputThread = new Thread(_view.ListenForInput);
-		}
-
-		private void place(PrintableEntity entity) {
-			Random r = new Random();
-			int x = r.Next(0, _view.X);
-			int y = r.Next(0, _view.Y);
-
-		}
-
-		private void Suscribe()
-		{
-			_view.KeyPressed += OnKeyPressed;
-		}
-
-		public void OnKeyPressed(object o, InputEventArgs input)
-		{
-			Console.WriteLine("Key {0} was pressed", input.KeyPressed);
-			_key = input.KeyPressed.Key;
-		}
+	*/
 
 	}
 }

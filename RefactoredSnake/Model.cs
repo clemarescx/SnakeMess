@@ -25,7 +25,7 @@ namespace RefactoredSnake {
 
 		}
 
-		public void snakeMoves(Point newHeadPos)
+		public void SnakeMoves(Point newHeadPos)
 		{
 			Snake.Last().Character = PrintableEntity.BodyChar;
 			Snake.AddHead(newHeadPos);
@@ -37,7 +37,7 @@ namespace RefactoredSnake {
 			Snake.AddHead(appleCoords);
 		}
 
-		public void placeApple(Point newCoords)
+		public void PlaceApple(Point newCoords)
 		{
 			Apple.Coords = newCoords;
 		}
@@ -59,17 +59,17 @@ namespace RefactoredSnake {
 			PrintBuffer.Add(Apple);
 		}
 
-		public void refreshSnake()
+		public void RefreshSnake()
 		{
 			while(Snake[0].Character.Equals(PrintableEntity.EmptyChar))
 				Snake.RemoveAt(0);
 		}
 
-		public bool contains(PrintableEntity entity) {
+		public bool Contains(PrintableEntity entity) {
 			return PrintBuffer.Contains(entity);
 		}
 
-		public bool add(PrintableEntity entity) {
+		public bool Add(PrintableEntity entity) {
 			if (PrintBuffer.Contains(entity))
 				return false;
 			PrintBuffer.Add(entity);

@@ -12,9 +12,6 @@ namespace RefactoredSnake {
 		public int X { get; private set; }
 		public int Y { get; private set; }
 
-		//Publisher delegate
-		public delegate void InputChangeHandler(object view, InputEventArgs input);
-		public event InputChangeHandler KeyPressed;
 
 		public View(Controller controller) {
 			gameLogic = controller;
@@ -59,25 +56,24 @@ namespace RefactoredSnake {
 			}
 		}
 
-		/// <summary>
-		/// Listens for keyboard keyPressed and sends it as an event
-		/// to suscriber classes
-		/// </summary>
-		public void ListenForInput()
+		public Command GetInputKey()
 		{
-			while (true)
-			{
-				if (Console.KeyAvailable)
-				{
-					InputEventArgs input = new InputEventArgs(Console.ReadKey(true));
+			if (Console.KeyAvailable) { // <-- this listens to input
 
-					if (KeyPressed != null)
-					{
-						KeyPressed(this, input);
-					}
-				}
-			}	
+				var inputKey = Console.ReadKey(true);
+
+				if (inputKey.Key == ConsoleKey.Escape)     return Command.Quit;
+				if (inputKey.Key == ConsoleKey.Spacebar)   return Command.Pause;
+				if (inputKey.Key == ConsoleKey.UpArrow)    return Command.Up;
+				if (inputKey.Key == ConsoleKey.RightArrow) return Command.Right; 
+				if (inputKey.Key == ConsoleKey.DownArrow)  return Command.Down;
+				if (inputKey.Key == ConsoleKey.LeftArrow)  return Command.Left;
+			}
+
+			return Command.NoInput;
 		}
+
+		
 
 	}
 }
