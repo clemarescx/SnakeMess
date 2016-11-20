@@ -10,7 +10,7 @@ namespace RefactoredSnake
 	/// and colours
 	///  
 	/// </summary>
-	public class PrintableEntity : Point
+	public class PrintableEntity
 	{
 		public static string HeadChar = "@";
 		public static string BodyChar = "0";

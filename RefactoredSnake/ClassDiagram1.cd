@@ -12,9 +12,9 @@
       <FileName>Controller.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="_model" />
-      <Field Name="_view" />
       <Field Name="_viewDims" />
+      <Field Name="_view" />
+      <Field Name="_model" />
       <Property Name="Direction" />
     </ShowAsAssociation>
   </Class>
@@ -23,17 +23,6 @@
     <AssociationLine Name="Apple" Type="RefactoredSnake.PrintableEntity">
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="0.061" Y="-0.274" />
-      </MemberNameLabel>
-    </AssociationLine>
-    <AssociationLine Name="ScreenDimensions" Type="RefactoredSnake.Point" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.5" Y="4.062" />
-        <Point X="13.375" Y="4.062" />
-        <Point X="13.375" Y="4.625" />
-        <Point X="13.75" Y="4.625" />
-      </Path>
-      <MemberNameLabel ManuallyPlaced="true">
-        <Position X="0.385" Y="0.335" />
       </MemberNameLabel>
     </AssociationLine>
     <AssociationLine Name="Snake" Type="RefactoredSnake.Snake" FixedFromPoint="true" FixedToPoint="true">
@@ -49,14 +38,25 @@
         <Position X="0.257" Y="-0.264" />
       </MemberNameLabel>
     </AssociationLine>
+    <AssociationLine Name="ScreenDimensions" Type="RefactoredSnake.Point" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="4.062" />
+        <Point X="13.375" Y="4.062" />
+        <Point X="13.375" Y="4.625" />
+        <Point X="13.75" Y="4.625" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.385" Y="0.335" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAQBAAAiAIAAABAAABAIIACAAIAAiAAAAQAAAAAAA=</HashCode>
       <FileName>Model.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Apple" />
-      <Property Name="ScreenDimensions" />
       <Property Name="Snake" />
+      <Property Name="ScreenDimensions" />
     </ShowAsAssociation>
   </Class>
   <Class Name="RefactoredSnake.View">
