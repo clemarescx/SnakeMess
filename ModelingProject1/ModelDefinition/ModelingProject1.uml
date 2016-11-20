@@ -66,6 +66,26 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="ca3438aa-cc08-4ac8-8d38-7a1c39b96e12"
+            name="printAll"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ce887b4d-6726-43db-8732-b0b898868a64"
+                  name="PrintBuffer"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -86,7 +106,14 @@
             isDerived="false"
             isDerivedUnion="false"
             aggregation="None"
-            isComposite="false" />
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f32c8fd8-9638-447c-b8fa-04c2fb83f6a5"
+                LastKnownName="List&lt;GameEntity&gt;"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </property>
           <property
             Id="d309f1da-3750-449a-a3d1-c0fe95a61f85"
             name="Apple"
@@ -115,7 +142,14 @@
             isDerived="false"
             isDerivedUnion="false"
             aggregation="None"
-            isComposite="false" />
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f32c8fd8-9638-447c-b8fa-04c2fb83f6a5"
+                LastKnownName="List&lt;GameEntity&gt;"
+                LastKnownLocation="ModelingProject1.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
@@ -206,18 +240,34 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="fa116e6c-4c56-4a44-8fbe-dc6dfbe2d8c4"
+            name="View"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="9150a337-d69c-4810-8797-25fdc3e038a0"
+            name="Model"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
             Id="004631b6-57fc-4048-a433-d4f6c803a884"
-            name="run"
-            isLeaf="false"
-            isStatic="false"
-            isAbstract="false"
-            concurrency="Sequential"
-            isQuery="false" />
-          <operation
-            Id="9ffe3e69-9db6-4578-8139-f2f15b16e86a"
-            name="initiate"
+            name="Main"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -233,6 +283,47 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="ba21405c-85f6-4f62-bfed-9cf88b906e0f"
+            isDerived="false"
+            sourceEndRoleName="GameEntity"
+            targetEndRoleName="Point"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="29d78f42-5f2a-4e98-93d4-ceb8b06cb56e"
+              LastKnownName="Point"
+              LastKnownLocation="ModelingProject1.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2f899aa4-4640-44d8-9178-a546c7a002da"
+                  name="GameEntity"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ea082f34-6300-45f6-8cde-32aea5d91c78"
+                  name="Point"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="f87444f9-6842-44c1-9d89-f807cedc0e2e"
@@ -267,6 +358,11 @@
       <undefinedType
         Id="cef910d4-255c-40a9-98e1-2ee9e6caaf22"
         name="GameEnti" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f32c8fd8-9638-447c-b8fa-04c2fb83f6a5"
+        name="List&lt;GameEntity&gt;" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

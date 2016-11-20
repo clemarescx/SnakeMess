@@ -13,9 +13,11 @@ using System.Diagnostics;
 //
 //          -Tomas
 //
-namespace SnakeMess {
-	class SnakeMess {
 
+namespace SnakeMess
+{
+	class SnakeMess
+	{
 		private static List<Point> _snake;
 		private static Point _apple;
 
@@ -34,13 +36,13 @@ namespace SnakeMess {
 		static Stopwatch _time;
 
 
-		public static void Main(string[] arguments) {
-
-
+		public static void Main(string[] arguments)
+		{
 			#region Game Variables initialisation
-			/**
-			 * INITIALISE GAME ELEMENTS
-			 */
+
+/**
+						 * INITIALISE GAME ELEMENTS
+						 */
 
 			// create game screen
 			Console.CursorVisible = false;
@@ -65,35 +67,40 @@ namespace SnakeMess {
 				new Point(10, 10)
 			};
 			PlaceCursor(_snake.Last());
-			
+
 			Console.Write(_snakeHeadChar);
 
 			// Create _apple and place it
-			
+
 			_rand = new Random();
 			_apple = new Point();
-			do {
+			do
+			{
 				_apple.X = _rand.Next(0, _screenBoundaryPoint.X);
 				_apple.Y = _rand.Next(0, _screenBoundaryPoint.Y);
-			}
-			while (HitsSnake(_apple));
+			} while (HitsSnake(_apple));
 
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.SetCursorPosition(_apple.X, _apple.Y);
-			
+
 			Console.Write(_appleChar);
-			
+
 			_time = new Stopwatch();
 			_time.Start();
+
 			#endregion
 
 			#region Game Loop Starts
-			/**
-			 * GAME LOOP START
-			 */
-			while (_running) {
+
+/**
+						 * GAME LOOP START
+						 */
+			while (_running)
+			{
 				// check for user input
-				if (Console.KeyAvailable) { // <-- this listens to input
+				if (Console.KeyAvailable)
+				{
+					// <-- this listens to input
 
 					var inputKey = Console.ReadKey(true);
 
@@ -115,16 +122,19 @@ namespace SnakeMess {
 						_newDirection = Direction.Left;
 				}
 
-				if (!_pause) {
-					if (_time.ElapsedMilliseconds < 100) {
+				if (!_pause)
+				{
+					if (_time.ElapsedMilliseconds < 100)
+					{
 						continue;
 					}
 					_time.Restart();
-					var snakeTail = _snake.First();	// new Point(_snake.First()));
-					var snakeHead = _snake.Last();	// new Point(_snake.Last()));
+					var snakeTail = _snake.First(); // new Point(_snake.First()));
+					var snakeHead = _snake.Last(); // new Point(_snake.Last()));
 					var newHead = new Point(snakeHead);
 
-					switch (_newDirection) {
+					switch (_newDirection)
+					{
 						case Direction.Up:
 							newHead.Y -= 1;
 							break;
@@ -141,39 +151,41 @@ namespace SnakeMess {
 
 					// The snake hits a wall
 					if (HitWall(newHead)) _running = false;
-					
 
-					// The snake eats the _apple
-					if (newHead == _apple) {
-						if (_snake.Count + 1 >= _screenBoundaryPoint.X * _screenBoundaryPoint.Y)
+					// This logic stack... 
+					if (newHead == _apple) 
+					{
+						if (_snake.Count + 1 >= _screenBoundaryPoint.X*_screenBoundaryPoint.Y)
 							// No more room to place apples - game over.
 							_running = false;
 						else {
-							while (true) {
+							while (true){
 								_apple.X = _rand.Next(0, _screenBoundaryPoint.X);
 								_apple.Y = _rand.Next(0, _screenBoundaryPoint.Y);
 
-								bool found = !HitsSnake(_apple);
+								bool found = !HitsSnake(_apple); // y tho..
 
-								if (found) {
+								if (found){
 									_addOneMoreBodyPart = true;
 									break;
 								}
 							}
 						}
 					}
-
-					if (!_addOneMoreBodyPart) {
+					if (!_addOneMoreBodyPart) // No.
+					{
 						_snake.RemoveAt(0);
 						foreach (var bodyPart in _snake)
-							if (bodyPart == newHead) {
+							if (bodyPart == newHead)
+							{
 								// Death by accidental self-cannibalism.
 								_running = false;
 								break;
-							}
+							} // Fuck this.
 					}
 
-					if (_running) {
+					if (_running)
+					{
 						Console.ForegroundColor = ConsoleColor.Yellow;
 						Console.SetCursorPosition(snakeHead.X, snakeHead.Y);
 						Console.Write(_snakeBodyChar);
@@ -198,6 +210,7 @@ namespace SnakeMess {
 					}
 				}
 			}
+
 			#endregion
 		}
 
@@ -206,11 +219,14 @@ namespace SnakeMess {
 			Console.SetCursorPosition(point.X, point.Y);
 		}
 
-		public static bool HitsSnake(Point point) {
+		public static bool HitsSnake(Point point)
+		{
 			bool isHit = false;
 
-			foreach (var bodyPart in _snake) {
-				if (bodyPart == point) {
+			foreach (var bodyPart in _snake)
+			{
+				if (bodyPart == point)
+				{
 					isHit = true;
 					break;
 				}
@@ -223,7 +239,8 @@ namespace SnakeMess {
 		/// </summary>
 		/// <param name="point"></param>
 		/// <returns></returns>
-		private static bool HitWall(Point point) {
+		private static bool HitWall(Point point)
+		{
 			return point.X < 0 || point.X >= _screenBoundaryPoint.X || point.Y < 0 || point.Y >= _screenBoundaryPoint.Y;
 		}
 	}

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeMess", "SnakeMess\Snak
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactoredSnake", "RefactoredSnake\RefactoredSnake.csproj", "{7FAFADAE-D09A-442A-B472-38E09BB38A6F}"
 EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ModelingProject1", "ModelingProject1\ModelingProject1.modelproj", "{8C9F665B-4A00-436A-B905-4B3CD736DCC0}"
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "SnakeUML", "ModelingProject1\SnakeUML.modelproj", "{8C9F665B-4A00-436A-B905-4B3CD736DCC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

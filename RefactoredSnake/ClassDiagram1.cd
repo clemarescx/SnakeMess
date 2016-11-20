@@ -80,14 +80,14 @@
     <Position X="0.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
-      <FileName>InputEventArgs.cs</FileName>
+      <FileName>Next iteration\InputEventArgs.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="RefactoredSnake.InputListener" Collapsed="true">
     <Position X="0.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAI=</HashCode>
-      <FileName>InputListener.cs</FileName>
+      <FileName>Next iteration\InputListener.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="RefactoredSnake.Point">
@@ -131,7 +131,7 @@
     <Position X="0.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAgAAEAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAgAAQA=</HashCode>
-      <FileName>ICommand.cs</FileName>
+      <FileName>Next iteration\ICommand.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="RefactoredSnake.Direction">

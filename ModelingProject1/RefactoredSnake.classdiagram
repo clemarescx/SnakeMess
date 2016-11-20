@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="0005ebdf-4af5-4da3-bf00-71be08096efe" name="RefactoredSnake" linkedPackageId="51243d97-311a-4631-80dc-a4b004927cc2" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="00d9665f-0e41-4e50-ac93-d95e76df5483">
-      <profileInstance Id="b26b822e-7544-42e8-b755-75d88400bafa" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="b7c534a6-f590-48a9-874d-4d77945e03d7">
-      <profileInstance Id="b84d73cb-c706-40f4-97a9-34d12011685e" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="673abfcc-2c59-4141-8153-3994695456c2" name="View" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -36,6 +22,18 @@
             <elementDefinition Id="2f15d591-97bc-4a9b-b161-3b7d055303f1" />
           </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="0eff7f47-bff3-455d-934f-3d408f32d754" name="printAll" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ca3438aa-cc08-4ac8-8d38-7a1c39b96e12" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="43731a53-e185-4ef4-8891-4d52fb6efaaa" name="PrintBuffer" direction="In" isUnique="false">
+                  <elementDefinition Id="ce887b4d-6726-43db-8732-b0b898868a64" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -44,6 +42,9 @@
         <ownedAttributesInternal>
           <property Id="aee6434c-9b67-4204-b24f-87ae59f1d2b2" name="Snake" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="137be0b7-a725-4f51-942b-87e1bd44970e" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="3c5252cc-79ae-4c6e-9257-f62a274dd4a3" LastKnownName="List&lt;GameEntity&gt;" />
+            </type_NamedElement>
           </property>
           <property Id="ec0c8006-70ba-4390-8fbc-fc8d4c89bace" name="Apple" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="d309f1da-3750-449a-a3d1-c0fe95a61f85" />
@@ -53,6 +54,9 @@
           </property>
           <property Id="e5d3cc51-7c51-4477-8365-df641fa73c24" name="PrintBuffer" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="fc548642-41a4-491e-a1dd-9de2dcca5ccc" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="3c5252cc-79ae-4c6e-9257-f62a274dd4a3" LastKnownName="List&lt;GameEntity&gt;" />
+            </type_NamedElement>
           </property>
         </ownedAttributesInternal>
       </class>
@@ -94,12 +98,17 @@
             <elementDefinition Id="567f02e6-d2a5-47b4-9ac3-a4ddc6bb63dc" />
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="4d859d5c-e89a-417e-8c22-36ed68dafc62" name="View" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="fa116e6c-4c56-4a44-8fbe-dc6dfbe2d8c4" />
+          </property>
+          <property Id="3c9e49f4-531f-4270-8677-fcde721f3306" name="Model" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="9150a337-d69c-4810-8797-25fdc3e038a0" />
+          </property>
+        </ownedAttributesInternal>
         <ownedOperationsInternal>
-          <operation Id="0b144a78-b8c3-47fe-a9d2-2034c417ed76" name="run" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="0b144a78-b8c3-47fe-a9d2-2034c417ed76" name="Main" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="004631b6-57fc-4048-a433-d4f6c803a884" />
-          </operation>
-          <operation Id="36909fb5-c150-47fd-84c8-de8bd0a46451" name="initiate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="9ffe3e69-9db6-4578-8139-f2f15b16e86a" />
           </operation>
         </ownedOperationsInternal>
       </class>
@@ -107,6 +116,24 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="a6fa82ac-2188-430d-b7e3-862430427215" name="GameEntity" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="5e742b71-584e-494f-973f-7e1727d00b88" />
+        <targetEnds>
+          <association Id="d0616747-f9a0-4e7e-a99e-2f3eba661c72" isDerived="false" sourceEndRoleName="GameEntity" targetEndRoleName="Point" isLeaf="false" isAbstract="false">
+            <classMoniker Id="4635ceaf-504c-4ee8-ab01-4d83ea65010c" LastKnownName="Point" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="42408beb-2855-4bb6-a6df-ddc661815ee5" name="GameEntity" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2f899aa4-4640-44d8-9178-a546c7a002da" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="30ddbd99-23ce-4e81-96f9-b680cd031199" name="Point" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ea082f34-6300-45f6-8cde-32aea5d91c78" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="ba21405c-85f6-4f62-bfed-9cf88b906e0f" />
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property Id="e6460407-29b6-4964-8435-c3c110c491b7" name="Coords" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="f87444f9-6842-44c1-9d89-f807cedc0e2e" />
@@ -132,8 +159,27 @@
         <elementDefinition Id="29d78f42-5f2a-4e98-93d4-ceb8b06cb56e" />
       </referencedType>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="3c5252cc-79ae-4c6e-9257-f62a274dd4a3" name="List&lt;GameEntity&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;GameEntity&gt;">
+        <elementDefinition Id="f32c8fd8-9638-447c-b8fa-04c2fb83f6a5" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="51243d97-311a-4631-80dc-a4b004927cc2" name="ModelingProject1">
     <elementDefinition Id="94536aad-eaf7-41b0-9a3b-6e08b7c9e052" />
+    <profileInstances>
+      <packageHasProfileInstances Id="00d9665f-0e41-4e50-ac93-d95e76df5483">
+        <profileInstance Id="b26b822e-7544-42e8-b755-75d88400bafa" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="b7c534a6-f590-48a9-874d-4d77945e03d7">
+        <profileInstance Id="b84d73cb-c706-40f4-97a9-34d12011685e" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>

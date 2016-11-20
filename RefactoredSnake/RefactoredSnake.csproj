@@ -46,10 +46,10 @@
     <Compile Include="Command.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="InputListener.cs" />
+    <Compile Include="Next iteration\ICommand.cs" />
+    <Compile Include="Next iteration\InputListener.cs" />
     <Compile Include="PrintableEntity.cs" />
-    <Compile Include="InputEventArgs.cs" />
+    <Compile Include="Next iteration\InputEventArgs.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Snake.cs" />
     <Compile Include="View.cs" />
