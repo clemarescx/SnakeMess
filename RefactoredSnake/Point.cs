@@ -45,6 +45,11 @@ namespace RefactoredSnake {
 			return !(point1 == point2);
 		}
 
+		public static Point operator +(Point point1, Point point2)
+		{
+			return new Point(point1.X + point2.X, point1.Y + point2.Y);
+		}
+
 		public override string ToString()
 		{
 			string pointStr = "(" + X +", "+ Y + ")";
