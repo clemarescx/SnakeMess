@@ -16,14 +16,14 @@ namespace SnakeMess {
 			Y = input.Y;
 		}
 
-		public void moveTo(int newX, int newY)
+		public void MoveTo(int newX, int newY)
 		{
 			X = newX;
 			Y = newY;
 		}
 
-		public void moveTo(Point point) {
-			moveTo(point.X, point.Y);
+		public void MoveTo(Point point) {
+			MoveTo(point.X, point.Y);
 		}
 
 		public new bool Equals(Object obj) {

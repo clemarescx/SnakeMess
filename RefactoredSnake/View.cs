@@ -1,20 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace RefactoredSnake {
-	class View {
-
-		private Controller gameLogic;
+namespace RefactoredSnake
+{
+	/// <summary>
+	/// The view is basically a wrapper for the terminal
+	/// and thus handles all I/O in the game
+	/// 
+	/// </summary>
+	internal class View
+	{
 		public int X { get; private set; }
 		public int Y { get; private set; }
 
+		public Command Command {
+			get {
+				throw new System.NotImplementedException();
+			}
 
-		public View(Controller controller) {
-			gameLogic = controller;
+			set {
+			}
+		}
+
+		public View()
+		{
 			SetupBoard();
 		}
 
@@ -49,31 +58,32 @@ namespace RefactoredSnake {
 		/// </summary>
 		public void PaintEntities(List<PrintableEntity> entities)
 		{
-			//Console.Clear(); <-- that's cheating!
+			//Console.Clear(); <-- that's cheating! 
 			foreach (var entity in entities)
 			{
 				PaintEntity(entity);
 			}
 		}
 
+		/// <summary>
+		/// Listens to input and returns a command index
+		/// </summary>
+		/// <returns></returns>
 		public Command GetInputKey()
 		{
-			if (Console.KeyAvailable) { // <-- this listens to input
-
+			if (Console.KeyAvailable)
+			{
 				var inputKey = Console.ReadKey(true);
 
-				if (inputKey.Key == ConsoleKey.Escape)     return Command.Quit;
-				if (inputKey.Key == ConsoleKey.Spacebar)   return Command.Pause;
-				if (inputKey.Key == ConsoleKey.UpArrow)    return Command.Up;
-				if (inputKey.Key == ConsoleKey.RightArrow) return Command.Right; 
-				if (inputKey.Key == ConsoleKey.DownArrow)  return Command.Down;
-				if (inputKey.Key == ConsoleKey.LeftArrow)  return Command.Left;
+				if (inputKey.Key == ConsoleKey.Escape) return Command.Quit;
+				if (inputKey.Key == ConsoleKey.Spacebar) return Command.Pause;
+				if (inputKey.Key == ConsoleKey.UpArrow) return Command.Up;
+				if (inputKey.Key == ConsoleKey.RightArrow) return Command.Right;
+				if (inputKey.Key == ConsoleKey.DownArrow) return Command.Down;
+				if (inputKey.Key == ConsoleKey.LeftArrow) return Command.Left;
 			}
 
 			return Command.NoInput;
 		}
-
-		
-
 	}
 }

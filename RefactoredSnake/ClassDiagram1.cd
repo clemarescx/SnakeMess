@@ -1,38 +1,151 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="RefactoredSnake.Controller" Collapsed="true">
-    <Position X="6.5" Y="1" Width="1.5" />
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="RefactoredSnake.Controller">
+    <Position X="5.75" Y="0.75" Width="1.5" />
+    <AssociationLine Name="_viewDims" Type="RefactoredSnake.Point">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.031" Y="0.797" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAgBAAAAAAAAAEgAAAAAAAAAAQAAAAAAABAAAAAA=</HashCode>
+      <HashCode>CAAAAAAAAAAAAAAAAiAAAAAAAAAAAAAAACAABAAAAAA=</HashCode>
       <FileName>Controller.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_model" />
+      <Field Name="_view" />
+      <Field Name="_viewDims" />
+      <Property Name="Direction" />
+    </ShowAsAssociation>
   </Class>
-  <Class Name="RefactoredSnake.GameEntity">
-    <Position X="4.75" Y="5" Width="1.5" />
+  <Class Name="RefactoredSnake.Model">
+    <Position X="5" Y="3.5" Width="2.5" />
+    <AssociationLine Name="Apple" Type="RefactoredSnake.PrintableEntity">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.061" Y="-0.274" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="ScreenDimensions" Type="RefactoredSnake.Point" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="4.062" />
+        <Point X="13.375" Y="4.062" />
+        <Point X="13.375" Y="4.625" />
+        <Point X="13.75" Y="4.625" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.385" Y="0.335" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Snake" Type="RefactoredSnake.Snake" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="3.75" />
+        <Point X="7.875" Y="3.75" />
+        <Point X="7.875" Y="2.531" />
+        <Point X="7.917" Y="2.531" Type="JumpStart" />
+        <Point X="8.083" Y="2.531" Type="JumpEnd" />
+        <Point X="10.5" Y="2.531" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.257" Y="-0.264" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAAAAAgAAAAAAAAAAAAAIAQIAAgABACiA=</HashCode>
-      <FileName>GameEntity.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="RefactoredSnake.Model" Collapsed="true">
-    <Position X="9.25" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ABAAAAAAAAAAAAABAAAAAAAAAAAIAAAAAQEAAAACAAA=</HashCode>
+      <HashCode>AAAAQBAAAiAIAAABAAABAIIACAAIAAiAAAAQAAAAAAA=</HashCode>
       <FileName>Model.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Apple" />
+      <Property Name="ScreenDimensions" />
+      <Property Name="Snake" />
+    </ShowAsAssociation>
   </Class>
-  <Class Name="RefactoredSnake.View" Collapsed="true">
-    <Position X="5.25" Y="3" Width="1.5" />
+  <Class Name="RefactoredSnake.View">
+    <Position X="2.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAEAAAAgAaAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAAAAAABAAAAAAAAAAAAEAAAAgAaAA=</HashCode>
       <FileName>View.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Command" />
+    </ShowAsAssociation>
   </Class>
+  <Class Name="RefactoredSnake.Debug">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAEAAA=</HashCode>
+      <FileName>Debug.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RefactoredSnake.InputEventArgs" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>InputEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RefactoredSnake.InputListener" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAI=</HashCode>
+      <FileName>InputListener.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RefactoredSnake.Point">
+    <Position X="13.75" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEwAAAAAAAAAAAAIAAAAAAAAAAYiA=</HashCode>
+      <FileName>Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RefactoredSnake.PrintableEntity">
+    <Position X="9.25" Y="4.25" Width="2.5" />
+    <AssociationLine Name="Coords" Type="RefactoredSnake.Point">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.021" Y="-0.273" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAgQAAAAQAAAAAAACAAAAAAAAAAAAAAAQAAAgAAACAA=</HashCode>
+      <FileName>PrintableEntity.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Coords" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RefactoredSnake.Snake">
+    <Position X="10.5" Y="0.5" Width="2.25" />
+    <AssociationLine Name="CurrentDirection" Type="RefactoredSnake.Point">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.06" Y="2.23" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAACCAAAAAAAAAAAAAAAQAAAEIAAAAA=</HashCode>
+      <FileName>Snake.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="CurrentDirection" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="RefactoredSnake.ICommand" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAgAAEAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAgAAQA=</HashCode>
+      <FileName>ICommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="RefactoredSnake.Direction">
-    <Position X="1" Y="4.75" Width="1.5" />
+    <Position X="8.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
       <FileName>Direction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RefactoredSnake.Command">
+    <Position X="2.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIAAAAAAAAAAAAAAAAAAAAAAAAACACIAAAAAQI=</HashCode>
+      <FileName>Command.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

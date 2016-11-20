@@ -1,67 +1,57 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace RefactoredSnake
 {
+	/// <summary>
+	/// The snake class represents how the snake is built
+	/// (i.e. where the tail and the head are) and which direction
+	/// it's headed for.
+	/// </summary>
 	public class Snake : List<PrintableEntity>
 	{
-		
-		//public List<PrintableEntity> BodyL { get; private set; }
-		private static readonly string _HEAD_CHAR = PrintableEntity.HeadChar;
-		private static readonly string _BODY_CHAR = PrintableEntity.BodyChar;
-
-		//public PrintableEntity Head;
-		//public PrintableEntity Tail;
+		private static readonly string HeadChar = PrintableEntity.HeadChar;
+		private static readonly string BodyChar = PrintableEntity.BodyChar;
 
 		public Point CurrentDirection;
 
-		public int BodyPartsCount => Count;
-
-
 		public Snake(Point startingCoords, Point direction, int length)
 		{
-			Add(new PrintableEntity(startingCoords, PrintableEntity.SnakeColor, _HEAD_CHAR));
-			for (int i = 0; i < length-1; i++)
+			// Construct the body first
+			for (int i = 0; i < length - 1; i++)
 			{
-				Insert(0, new PrintableEntity(startingCoords, PrintableEntity.SnakeColor, _BODY_CHAR));
+				Insert(0, new PrintableEntity(startingCoords, PrintableEntity.SnakeColor, BodyChar));
 			}
-			/*
-			Head = this.Last();
-			Tail = this.First();
-			*/
+			// Then add the head
+			AddHead(startingCoords);
 			CurrentDirection = direction;
 		}
-
-		/// <summary>
-		/// Construct the default snake with custom coordinates
-		/// </summary>
-		/// <param name="startingCoords"></param>
-		public Snake(Point startingCoords): this(startingCoords,new Point(0,1), 4) { }
+		
+		public Snake(Point startingCoords) : this(startingCoords, new Point(0, 1), 4)
+		{
+		}
 
 		/// <summary>
 		/// The default constructor places the snake at the original
 		/// solution's default spot
 		/// </summary>
-		public Snake() : this(new Point(10, 10)) { }
+		public Snake() : this(new Point(10, 10))
+		{
+		}
 
 		public void AddHead(Point point)
 		{
-			Add(new PrintableEntity(point, PrintableEntity.SnakeColor, _HEAD_CHAR));
+			Add(new PrintableEntity(point, PrintableEntity.SnakeColor, HeadChar));
 		}
 
-		public PrintableEntity getHead()
+		public PrintableEntity GetHead()
 		{
 			return this.Last();
 		}
 
-		public PrintableEntity getTail()
+		public PrintableEntity GetTail()
 		{
 			return this.First();
 		}
-
-	
 	}
 }

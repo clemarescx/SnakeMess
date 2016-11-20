@@ -1,12 +1,18 @@
 ﻿using System;
-using System.Threading;
 
 namespace RefactoredSnake
 {
+	/// <summary>
+	/// Not used - contains boilerplate code for the
+	/// Publisher class in a delegate-event based 
+	/// Observer design pattern
+	/// 
+	/// </summary>
 	public class InputListener
 	{
 		//Publisher delegate
 		public delegate void InputChangeHandler(object view, InputEventArgs input);
+
 		public event InputChangeHandler KeyPressed;
 
 
@@ -14,24 +20,18 @@ namespace RefactoredSnake
 		/// Listens for keyboard keyPressed and sends it as an event
 		/// to suscriber classes
 		/// </summary>
-		public void Run() {
+		public void Run()
+		{
 			while (true)
 			{
-				//Thread.Sleep(100);
 				if (Console.KeyAvailable)
 				{
-					InputEventArgs Pressed = new InputEventArgs(Console.ReadKey(true));
+					InputEventArgs pressed = new InputEventArgs(Console.ReadKey(true));
 
-					if (KeyPressed != null)
-					{
-						KeyPressed(this, Pressed);
-					}
+					KeyPressed?.Invoke(this, pressed);
+					//Thread.Sleep(100);
 				}
-				
 			}
-
 		}
-
-
 	}
 }

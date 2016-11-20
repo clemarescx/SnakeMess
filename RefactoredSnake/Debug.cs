@@ -2,14 +2,17 @@
 
 namespace RefactoredSnake
 {
+	/// <summary>
+	/// Helper class to print debugging text
+	/// </summary>
 	public static class Debug
 	{
-		private static int lineCount = 0;
-		public static void print(string str, params object[] args)
+		private static int _lineCount = 0;
+		public static void Print(string str, params object[] args)
 		{
-			Console.SetCursorPosition(0,lineCount++);
+			Console.ForegroundColor = ConsoleColor.Magenta;
+			Console.SetCursorPosition(0,_lineCount++);
 			Console.WriteLine(str, args);
-
 		}
 		
 	}

@@ -1,8 +1,13 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace RefactoredSnake
 {
+	/// <summary>
+	/// Following the MVC patter to the letter, this is the binding
+	/// class between I/O (view) and "database"/element behaviour
+	/// 
+	/// It contains the main method, which contains the game loop
+	/// </summary>
 	internal class Controller
 	{
 		private static Point _viewDims;
@@ -11,20 +16,27 @@ namespace RefactoredSnake
 
 		public Controller()
 		{
-			_view = new View(this);
+			_view = new View();
+			_viewDims = new Point(_view.X, _view.Y);
+			_model = new Model { ScreenDimensions = _viewDims };
+		}
+
+		public Direction Direction {
+			get {
+				throw new System.NotImplementedException();
+			}
+
+			set {
+			}
 		}
 
 		public static void Main(string[] args)
 		{
-			var gameLogic = new Controller();
-
-			_viewDims = new Point(_view.X, _view.Y);
-			_model = new Model {ScreenDimensions = _viewDims};
-			_model.PlaceApple();
+			new Controller();
 
 			var running = true;
 			var paused = false;
-
+			_model.PlaceApple();
 			var newDirection = _model.Snake.CurrentDirection;
 			_view.PaintEntities(_model.PrintBuffer);
 
@@ -67,11 +79,11 @@ namespace RefactoredSnake
 				if (paused || timer.ElapsedMilliseconds < 100) continue;
 				timer.Restart();
 
-				newDirection = _model.ValidateDirection(newDirection);
+				newDirection = _model.ValidateDirection(newDirection); // dismisses backwards
+				Point newCoordinates = newDirection + _model.Snake.GetHead().Coords;
 
-				Point newCoordinates = newDirection + _model.Snake.getHead().Coords;
-
-				bool outOfBounds = _model.isOutOfBounds(newCoordinates);
+				// check new coordinates for lose conditions
+				bool outOfBounds = _model.IsOutOfBounds(newCoordinates);
 				bool collidesSnake = _model.HitsSnake(newCoordinates);
 				if (outOfBounds || collidesSnake)
 				{
@@ -79,11 +91,11 @@ namespace RefactoredSnake
 					continue;
 				}
 
-
+				// what happens when the snake's head meets the apple
 				if (newCoordinates == _model.Apple.Coords)
 				{
 					_model.SnakeEatsApple(newCoordinates);
-					if (_model.Snake.Count - 1 == _viewDims.X*_viewDims.Y)
+					if (_model.Snake.Count == _viewDims.X * _viewDims.Y)
 					{
 						// Congrats, you win!
 						running = false;
@@ -96,14 +108,9 @@ namespace RefactoredSnake
 					_model.SnakeMoves(newCoordinates);
 				}
 
-
-				// update
+				// update the state of the game and the view
 				_model.UpdatePrintableBuffer();
-
-				// paint			
 				_view.PaintEntities(_model.PrintBuffer);
-
-				// clean out the " " printables
 				_model.RefreshSnake();
 			}
 		}
@@ -111,6 +118,14 @@ namespace RefactoredSnake
 		#endregion
 
 		/*
+		 * Below are the boilerplate subscriber methods 
+		 * for the delegate-event based Observer 
+		 * (publisher-suscriber) design pattern.
+		 * 
+		 * But delegate + events + threading proved
+		 * too difficult to debug / handle...
+		 * 
+		 * 
 		static void Initiate(InputListener listener)
 		{
 			_inputThread = new Thread(listener.Run);

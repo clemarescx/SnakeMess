@@ -27,9 +27,9 @@ namespace SnakeMess {
 		static Direction _newDirection;
 		static Direction _lastDirection;
 
-		static string _snake_body_char = "0";
-		static string _snake_head_char = "@";
-		static string _apple_char = "$";
+		static string _snakeBodyChar = "0";
+		static string _snakeHeadChar = "@";
+		static string _appleChar = "$";
 		static Random _rand;
 		static Stopwatch _time;
 
@@ -66,7 +66,7 @@ namespace SnakeMess {
 			};
 			PlaceCursor(_snake.Last());
 			
-			Console.Write(_snake_head_char);
+			Console.Write(_snakeHeadChar);
 
 			// Create _apple and place it
 			
@@ -76,12 +76,12 @@ namespace SnakeMess {
 				_apple.X = _rand.Next(0, _screenBoundaryPoint.X);
 				_apple.Y = _rand.Next(0, _screenBoundaryPoint.Y);
 			}
-			while (hitsSnake(_apple));
+			while (HitsSnake(_apple));
 
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.SetCursorPosition(_apple.X, _apple.Y);
 			
-			Console.Write(_apple_char);
+			Console.Write(_appleChar);
 			
 			_time = new Stopwatch();
 			_time.Start();
@@ -120,9 +120,9 @@ namespace SnakeMess {
 						continue;
 					}
 					_time.Restart();
-					var _snake_tail = _snake.First();	// new Point(_snake.First()));
-					var _snake_head = _snake.Last();	// new Point(_snake.Last()));
-					var newHead = new Point(_snake_head);
+					var snakeTail = _snake.First();	// new Point(_snake.First()));
+					var snakeHead = _snake.Last();	// new Point(_snake.Last()));
+					var newHead = new Point(snakeHead);
 
 					switch (_newDirection) {
 						case Direction.Up:
@@ -153,7 +153,7 @@ namespace SnakeMess {
 								_apple.X = _rand.Next(0, _screenBoundaryPoint.X);
 								_apple.Y = _rand.Next(0, _screenBoundaryPoint.Y);
 
-								bool found = !hitsSnake(_apple);
+								bool found = !HitsSnake(_apple);
 
 								if (found) {
 									_addOneMoreBodyPart = true;
@@ -175,25 +175,25 @@ namespace SnakeMess {
 
 					if (_running) {
 						Console.ForegroundColor = ConsoleColor.Yellow;
-						Console.SetCursorPosition(_snake_head.X, _snake_head.Y);
-						Console.Write(_snake_body_char);
+						Console.SetCursorPosition(snakeHead.X, snakeHead.Y);
+						Console.Write(_snakeBodyChar);
 
 						if (_addOneMoreBodyPart)
 						{
 							Console.ForegroundColor = ConsoleColor.Green;
 							Console.SetCursorPosition(_apple.X, _apple.Y);
-							Console.Write(_apple_char);
+							Console.Write(_appleChar);
 							_addOneMoreBodyPart = false;
 						}
 						else
 						{
-							Console.SetCursorPosition(_snake_tail.X, _snake_tail.Y);
+							Console.SetCursorPosition(snakeTail.X, snakeTail.Y);
 							Console.Write(" ");
 						}
 						_snake.Add(newHead);
 						Console.ForegroundColor = ConsoleColor.Yellow;
 						Console.SetCursorPosition(newHead.X, newHead.Y);
-						Console.Write(_snake_head_char);
+						Console.Write(_snakeHeadChar);
 						_lastDirection = _newDirection;
 					}
 				}
@@ -206,7 +206,7 @@ namespace SnakeMess {
 			Console.SetCursorPosition(point.X, point.Y);
 		}
 
-		public static bool hitsSnake(Point point) {
+		public static bool HitsSnake(Point point) {
 			bool isHit = false;
 
 			foreach (var bodyPart in _snake) {

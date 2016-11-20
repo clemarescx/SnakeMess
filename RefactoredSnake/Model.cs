@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RefactoredSnake
-{
+namespace RefactoredSnake {
 	internal class Model
 	{
 		public List<PrintableEntity> PrintBuffer { get; }
@@ -14,7 +11,6 @@ namespace RefactoredSnake
 		private readonly Random _rand;
 		public Point ScreenDimensions { private get; set; }
 
-		private bool ateApple = false;
 
 		public Model()
 		{
@@ -27,14 +23,15 @@ namespace RefactoredSnake
 		}
 
 		/// <summary>
-		/// Checks if the snake eats its own face
-		/// (if the direction is towards the snake's body)
+		/// Returns and update the snake's direction only if
+		/// the snake doesn't attempt to eat its own face
+		/// (i.e. the direction is towards the snake's body)
 		/// </summary>
 		/// <param name="newDirection"></param>
 		/// <returns></returns>
 		public Point ValidateDirection(Point newDirection)
 		{
-			Point nullVector = new Point(0, 0);
+			var nullVector = new Point();	// vector (0,0)
 			if ((Snake.CurrentDirection + newDirection) != nullVector)
 			{
 				Snake.CurrentDirection = newDirection;
@@ -56,7 +53,7 @@ namespace RefactoredSnake
 			Snake.AddHead(appleCoords);
 		}
 
-		public bool isOutOfBounds(Point point)
+		public bool IsOutOfBounds(Point point)
 		{
 			return point.X < 0 ||
 			       point.Y < 0 ||

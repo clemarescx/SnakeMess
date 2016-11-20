@@ -1,11 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 
-namespace RefactoredSnake{
-	public class PrintableEntity
+namespace RefactoredSnake
+{
+	/// <summary>
+	/// Represents a visible entity, including its coordinates
+	/// and "textured model" (character + colour) 
+	/// 
+	/// Also contains the static reference for available characters
+	/// and colours
+	///  
+	/// </summary>
+	public class PrintableEntity : Point
 	{
-
 		public static string HeadChar = "@";
 		public static string BodyChar = "0";
 		public static string AppleChar = "$";
@@ -22,40 +28,28 @@ namespace RefactoredSnake{
 		public string Character { get; set; }
 
 		public PrintableEntity(
-			Point point, 
-			ConsoleColor color = ConsoleColor.Magenta, 
-			string character = "X") {
+			Point point,
+			ConsoleColor color = ConsoleColor.Magenta,
+			string character = "X")
+		{
 			Coords = new Point(point);
 			Color = color;
 			Character = character;
 		}
-		public PrintableEntity(int x, int y) : this(new Point(x, y)){}
 
-		public PrintableEntity(PrintableEntity entity) : this(entity.Coords, entity.Color, entity.Character){}
-
-		public void UpdateCoords(Point point)
+		public PrintableEntity(int x, int y) : this(new Point(x, y))
 		{
-			Coords = new Point(point);
 		}
 
-
-		/*
-		public new bool Equals(Object obj) {
-			if (!(obj is PrintableEntity))
-				return false;
-			PrintableEntity gameEntity = (PrintableEntity) obj;
-			//return X == gameEntity.X && Y == gameEntity.Y;
-			return this.Coords == gameEntity.Coords;
-		}
-
-		public static bool operator ==(PrintableEntity ent1, PrintableEntity ent2)
+		public PrintableEntity(PrintableEntity entity) : this(entity.Coords, entity.Color, entity.Character)
 		{
-			return ent1 != null && ent1.Equals(ent2);
 		}
 
-		public static bool operator !=(PrintableEntity ent1, PrintableEntity ent2) {
-			return !(ent1 == ent2);
+		/// <summary>
+		/// Default constructor
+		/// </summary>
+		public PrintableEntity() : this(0, 0)
+		{
 		}
-		*/
 	}
 }
